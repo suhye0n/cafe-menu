@@ -11,12 +11,13 @@ public interface MenuService {
     public int menuInsert (HashMap<String, Object> param);
 
     //메뉴 목록 조회 기능
+//    public List<HashMap<String, Object>> menuSelectList (HashMap<String, Object> param);
     public List<HashMap<String, Object>> menuSelectList ();
 
     //메뉴 수정 기능
-    public void menuUpdate ();
+    public int menuUpdate (HashMap<String, Object> param);
 
     //메뉴 삭제 기능
-    public void menuDelete ();
+    public int menuDelete (HashMap<String, Object> param);
 
 }
