@@ -3,16 +3,29 @@ package kr.co.edu.menu.web;
 import kr.co.edu.menu.service.MenuService;
 import kr.co.edu.menu.service.impl.MenuServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
+
 @Controller
 public class MenuController {
 
     @Autowired
-    private MenuServiceImpl menuService;
+    private MenuService menuService;
+
+    @RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView main () {
+        ModelAndView mav = new ModelAndView("jsonView");
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("testNumber", 1);
+        result.put("testString", "문자열");
+        mav.addObject(result);
+        return mav;
+    }
 
     @RequestMapping(value = "/menuInsert.request", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView menuInsert () {
@@ -20,4 +33,5 @@ public class MenuController {
         //menuService.menuInsert();
         return mav;
     }
+
 }

@@ -7,8 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
+import java.util.List;
 
-
+@Service
 public class MenuServiceImpl implements MenuService {
 
     @Autowired
@@ -19,4 +20,20 @@ public class MenuServiceImpl implements MenuService {
         HashMap<String, Object> data = new HashMap<>();
         menuDAO.menuInsert();
     }
+
+    @Override
+    public List<HashMap<String, Object>> menuSelectList() {
+        return null;
+    }
+
+    @Override
+    public void menuUpdate() {
+
+    }
+
+    @Override
+    public void menuDelete() {
+
+    }
+
 }

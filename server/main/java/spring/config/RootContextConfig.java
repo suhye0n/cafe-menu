@@ -34,7 +34,7 @@ public class RootContextConfig {
         hikariConfig.setDriverClassName("org.mariadb.jdbc.Driver");
         hikariConfig.setJdbcUrl("jdbc:mariadb://localhost:3306/test");
         hikariConfig.setUsername("root");
-        hikariConfig.setPassword("1234");
+        hikariConfig.setPassword("1111");
         return hikariConfig;
     }
 
