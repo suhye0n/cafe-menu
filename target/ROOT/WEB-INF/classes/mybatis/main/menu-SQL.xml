@@ -3,7 +3,7 @@
 
 <mapper namespace="kr.co.edu.menu.dao.MenuDAO">
 
-    <insert id="menuInsert">
+    <insert id="menuInsert" parameterType="java.Util.HashMap">
         INSERT INTO product (
             product_name
             , product_category
@@ -20,4 +20,20 @@
             , CAST(#{product_date} AS DATE)
         )
     </insert>
+
+    <select id="menuSelectList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+        SELECT
+        product_name
+        , product_category
+        , product_price
+        , product_writer
+        , product_explan
+        , product_date
+        FROM
+        product
+        <if test="product_name != null and product_name != ''">
+            WHERE
+            product_name like CONCAT('%', #{product_name}, '%')
+        </if>
+    </select>
 </mapper>

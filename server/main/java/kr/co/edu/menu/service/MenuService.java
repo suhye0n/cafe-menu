@@ -5,11 +5,10 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 
-@Service
 public interface MenuService {
 
     //메뉴 등록 기능
-    public void menuInsert ();
+    public int menuInsert (HashMap<String, Object> param);
 
     //메뉴 목록 조회 기능
     public List<HashMap<String, Object>> menuSelectList ();

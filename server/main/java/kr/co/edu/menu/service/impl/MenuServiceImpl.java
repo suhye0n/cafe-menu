@@ -16,14 +16,15 @@ public class MenuServiceImpl implements MenuService {
     private MenuDAO menuDAO;
 
     @Override
-    public void menuInsert () {
+    public int menuInsert (HashMap<String, Object> param) {
         HashMap<String, Object> data = new HashMap<>();
-        menuDAO.menuInsert();
+        int insertCount = menuDAO.menuInsert(param);
+        return insertCount;
     }
 
     @Override
     public List<HashMap<String, Object>> menuSelectList() {
-        return null;
+        return menuDAO.menuSelectList();
     }
 
     @Override

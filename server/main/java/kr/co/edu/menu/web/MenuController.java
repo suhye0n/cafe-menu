@@ -5,11 +5,14 @@ import kr.co.edu.menu.service.impl.MenuServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
+import java.util.List;
 
 @Controller
 public class MenuController {
@@ -28,9 +31,18 @@ public class MenuController {
     }
 
     @RequestMapping(value = "/menuInsert.request", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView menuInsert () {
+    public ModelAndView menuInsert (/*@RequestBody*/ @RequestParam HashMap<String, Object> param) {
         ModelAndView mav = new ModelAndView("jsonView");
-        //menuService.menuInsert();
+        int insertCount = menuService.menuInsert(param);
+        mav.addObject("result", insertCount);
+        return mav;
+    }
+
+    @RequestMapping(value = "/menuSelectList.request", method = RequestMethod.GET)
+    public ModelAndView menuSelectList () {
+        ModelAndView mav = new ModelAndView("jsonView");
+        List<HashMap<String, Object>> menuList = menuService.menuSelectList();
+        mav.addObject("result", menuList);
         return mav;
     }
 
