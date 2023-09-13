@@ -159,7 +159,6 @@ const App = {
 
         menuSelectList: function () {
             let vm = this;
-
             axios({
                 url: '/menuSelectList.request',
                 method: 'get',
@@ -177,14 +176,14 @@ const App = {
             axios({
                 url: "/menuSearch.request",
                 method: "post",
-                headers: { // 'header'를 'headers'로 변경
+                headers: {
                     "Content-Type": "application/json; charset=UTF-8",
                 },
-                data: searchPayload,  // 검색어를 함께 전송
+                data: searchPayload,
             })
             .then(function (response) {
                 console.log("dataSearch - response : ", response.data);
-                vm.dataList = response.data; // 수정
+                vm.menuList = response.data;
             })
             .catch(function (error) {
                 console.log("dataSearch - error : ", error);
