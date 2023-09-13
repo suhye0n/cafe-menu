@@ -53,6 +53,7 @@ public class MenuController {
 
     @RequestMapping(value = "/menuUpdate.request", method = RequestMethod.POST)
     public ModelAndView menuUpdate(@RequestBody HashMap<String, Object> param) {
+        System.out.println(param);
         ModelAndView mav = new ModelAndView("jsonView");
         mav.addObject("result", menuService.menuUpdate(param));
         return mav;

@@ -29,8 +29,11 @@
             작성자 : <input type="text" v-model="menu.product_writer">
         </div>
         <div>
-            <input type="radio" name="temp" value="아이스" v-model="menu.product_explan">아이스
-            <input type="radio" name="temp" value="핫" v-model="menu.product_explan">핫
+            <input type="radio" name="temp" value="아이스" v-model="menu.product_temperature">아이스
+            <input type="radio" name="temp" value="핫" v-model="menu.product_temperature">핫
+        </div>
+        <div>
+            상세 설명 : <textarea v-model="menu.product_explan" />
         </div>
         <div>
             <button @click="menuInsert()">등록</button>
@@ -45,6 +48,7 @@
                     <th style="border: 1px solid #000;">작성자</th>
                     <th style="border: 1px solid #000;">작성일</th>
                     <th style="border: 1px solid #000;">카테고리</th>
+                    <th style="border: 1px solid #000;">설명</th>
                     <th style="border: 1px solid #000;">핫/아이스</th>
                     <th style="border: 1px solid #000;">수정</th>
                     <th style="border: 1px solid #000;">삭제</th>
@@ -59,8 +63,9 @@
                     <td style="border: 1px solid #000;">{{item.product_date}}</td>
                     <td style="border: 1px solid #000;">{{item.product_category}}</td>
                     <td style="border: 1px solid #000;">{{item.product_explan}}</td>
+                    <td style="border: 1px solid #000;">{{item.product_temperature}}</td>
                     <td style="border: 1px solid #000;"><button @click="menuUpdate(item)">수정</button></td>
-                    <td style="border: 1px solid #000;"><button @click="menuDelete(item)">삭제</button></td>
+                    <td style="border: 1px solid #000;"><button @click="menuDelete(item.product_index)">삭제</button></td>
                 </tr>
             </tbody>
         </table>
@@ -81,10 +86,22 @@
                     product_price: 0,
                     product_category: null,
                     product_explan: null,
+                    product_temperature: null,
                     product_writer: null,
                     product_date: null,
                     searchType: "상품명",
                     searchKeyword: "",
+                },
+
+                newData: {
+                    product_index: null,
+                    product_name: null,
+                    product_category: null,
+                    product_price: null,
+                    product_writer: null,
+                    product_explan: null,
+                    product_temperature: null,
+                    product_date: null
                 },
 
                 menuList: [],
@@ -104,6 +121,7 @@
                 }).then(function (response) {
                     console.log('/menuInsert.request의 response 결과 값 : ' + response);
                     if (response.data > 0) {
+                        alert("상품이 등록되었습니다.");
                         vm.menuSelectList();
                     } else {
                         alert('등록된 메뉴가 없습니다.');
@@ -145,17 +163,21 @@
                         vm.menuSelectList();
                     }
                 }).catch(function (error) {
+                    console.log('/menuUpdate.request 에러 발생', error);
                     alert('메뉴 수정 에러가 발생하였습니다.');
                 });
             },
 
             menuDelete: function (item) {
+                console.log(item);
                 let vm = this;
                 axios({
                     url: '/menuDelete.request',
                     method: 'post',
-                    data: { product_index: item.product_index },
+                    data: { product_index: item },
                 }).then(function (response) {
+                    alert('메뉴 삭제가 완료되었습니다.');
+                    console.log(response);
                     if (response.data > 0) {
                         vm.menuSelectList();
                     }

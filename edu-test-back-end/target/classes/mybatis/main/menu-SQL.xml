@@ -10,6 +10,7 @@
             , product_price
             , product_writer
             , product_explan
+            , product_temperature
             , product_date
         ) VALUES (
             #{product_name}
@@ -17,17 +18,20 @@
             , #{product_price}
             , #{product_writer}
             , #{product_explan}
+            , #{product_temperature}
             , CAST(#{product_date} AS DATE)
         )
     </insert>
 
     <select id="menuSelectList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
         SELECT
-        product_name
+        product_index
+        , product_name
         , product_category
         , product_price
         , product_writer
         , product_explan
+        , product_temperature
         , product_date
         FROM
         product

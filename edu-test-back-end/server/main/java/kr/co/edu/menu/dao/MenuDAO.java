@@ -15,6 +15,7 @@ public interface MenuDAO {
 
     public int menuDelete(HashMap<String, Object> param);
 
-//    public List<HashMap<String, Object>> menuSelectList(HashMap<String, Object> param);
-public List<HashMap<String, Object>> menuSelectList();
+    // public List<HashMap<String, Object>> menuSelectList(HashMap<String, Object>
+    // param);
+    public List<HashMap<String, Object>> menuSelectList();
 }
