@@ -3,11 +3,12 @@
     <div>
         <router-view/>
     </div>
-    <div>여긴 푸터자리</div>
+    <Footer></Footer>
 </template>
 
 <script>
     import Header from './layout/Header.vue';
+    import Footer from './layout/Footer.vue';
     import Main from './pages/main/main.vue';
 
     const App = {
@@ -31,6 +32,7 @@
         components: {
             'Header': Header,
             'Main': Main,
+            'Footer': Footer,
         },
         mounted: () => {
             console.log("App.vue가 초기화됨");

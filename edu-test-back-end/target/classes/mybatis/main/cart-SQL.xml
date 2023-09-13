@@ -3,7 +3,7 @@
 
 <mapper namespace="kr.co.edu.menu.dao.OrderDAO">
 
-    <insert id="cartInsert" parameterType="java.util.HashMap">
+    <insert id="orderInsert" parameterType="java.util.HashMap">
         INSERT INTO product_order (
                               order_product_number
                             , order_product_name
@@ -25,7 +25,7 @@
                  )
     </insert>
 
-    <select id="cartSelectList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+    <select id="orderSelectList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
         SELECT
         order_product_number
         , order_product_name
@@ -43,7 +43,7 @@
         </if>
     </select>
 
-    <delete id="cartDelete" parameterType="java.util.HashMap">
+    <delete id="orderDelete" parameterType="java.util.HashMap">
         DELETE
         FROM
             product_order

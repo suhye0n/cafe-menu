@@ -1,5 +1,5 @@
 <template>
-    <div class="container cafe">
+    <div class="cafe">
         <div>
             <select v-model="searchType">
                 <option value="상품명">상품명</option>
@@ -9,69 +9,76 @@
             <input type="text" v-model="searchKeyword" placeholder="입력해주세요.">
             <button @click="menuSearch()">검색</button>
         </div>
-        <div>
-            상품명:
-            <input type="text" v-model="menu.product_name">
+        
+        <hr />
+
+        <div class="container">
+            <div>
+                <input class="full" placeholder="상품명" type="text" v-model="menu.product_name">
+            </div>
+            <div class="margin">
+                <input type="radio" name="category" value="아메리카노" v-model="menu.product_category">아메리카노
+                <input type="radio" name="category" value="카페라떼" v-model="menu.product_category">카페라떼
+                <input type="radio" name="category" value="에이드" v-model="menu.product_category">에이드
+                <input type="radio" name="category" value="스무디" v-model="menu.product_category">스무디
+                <input type="radio" name="category" value="프라푸치노" v-model="menu.product_category">프라푸치노
+                <input type="radio" name="category" value="콜라" v-model="menu.product_category">콜라
+            </div>
+            <div class="margin">
+                <h5>가격</h5>
+                <input type="number" v-model="menu.product_price">
+            </div>
+            <div>
+                <h5>작성자</h5>
+                <input type="text" v-model="menu.product_writer">
+            </div>
+            <div class="margin">
+                <input type="checkbox" value="아이스" v-model="menu.product_ice"> 아이스
+                <input type="checkbox" value="핫" v-model="menu.product_hot"> 핫
+            </div>
+            <div>
+                <textarea class="full" placeholder="상세 설명" v-model="menu.product_explan" />
+            </div>
+            <div class="margin">
+                <button @click="handleButtonAction()">{{ buttonLabel }}</button>
+                <button class="button" id="addBtn" @click="resetForm()">취소</button>
+            </div>
         </div>
+
         <div>
-            카테고리 : 
-            <input type="radio" name="category" value="아메리카노" v-model="menu.product_category">아메리카노
-            <input type="radio" name="category" value="카페라떼" v-model="menu.product_category">카페라떼
-            <input type="radio" name="category" value="에이드" v-model="menu.product_category">에이드
-            <input type="radio" name="category" value="스무디" v-model="menu.product_category">스무디
-            <input type="radio" name="category" value="프라푸치노" v-model="menu.product_category">프라푸치노
-            <input type="radio" name="category" value="콜라" v-model="menu.product_category">콜라
+            <table style="border: 1px solid #000; text-align: center;">
+                <thead>
+                    <tr>
+                        <th>NO</th>
+                        <th>상품명</th>
+                        <th>메뉴가격(단위:원)</th>
+                        <th>작성자</th>
+                        <th>작성일</th>
+                        <th>카테고리</th>
+                        <th>설명</th>
+                        <th>핫</th>
+                        <th>아이스</th>
+                        <th>수정</th>
+                        <th>삭제</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(item, idx) in menuList">
+                        <td>{{idx}}</td>
+                        <td>{{item.product_name}}</td>
+                        <td>{{item.product_price}}</td>
+                        <td>{{item.product_writer}}</td>
+                        <td>{{item.product_date}}</td>
+                        <td>{{item.product_category}}</td>
+                        <td>{{item.product_explan}}</td>
+                        <td>{{item.product_hot}}</td>
+                        <td>{{item.product_ice}}</td>
+                        <td><button @click="menuSelectOne(item)">수정</button></td>
+                        <td><button @click="menuDelete(item.product_index)">삭제</button></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <div>
-            가격 : <input type="number" v-model="menu.product_price">
-        </div>
-        <div>
-            작성자 : <input type="text" v-model="menu.product_writer">
-        </div>
-        <div>
-            <input type="checkbox" value="아이스" v-model="menu.product_ice">아이스
-            <input type="checkbox" value="핫" v-model="menu.product_hot">핫
-        </div>
-        <div>
-            상세 설명 : <textarea v-model="menu.product_explan" />
-        </div>
-        <div>
-            <button @click="handleButtonAction()">{{ buttonLabel }}</button>
-            <button class="button" id="addBtn" @click="resetForm()">취소</button>
-        </div>
-        <div>-------------------------------------------</div>
-        <table style="border: 1px solid #000; text-align: center;">
-            <thead>
-                <tr>
-                    <th style="border: 1px solid #000;">NO</th>
-                    <th style="border: 1px solid #000;">상품명</th>
-                    <th style="border: 1px solid #000;">메뉴가격(단위:원)</th>
-                    <th style="border: 1px solid #000;">작성자</th>
-                    <th style="border: 1px solid #000;">작성일</th>
-                    <th style="border: 1px solid #000;">카테고리</th>
-                    <th style="border: 1px solid #000;">설명</th>
-                    <th style="border: 1px solid #000;">핫</th>
-                    <th style="border: 1px solid #000;">아이스</th>
-                    <th style="border: 1px solid #000;">수정</th>
-                    <th style="border: 1px solid #000;">삭제</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="(item, idx) in menuList">
-                    <td style="border: 1px solid #000;">{{idx}}</td>
-                    <td style="border: 1px solid #000;">{{item.product_name}}</td>
-                    <td style="border: 1px solid #000;">{{item.product_price}}</td>
-                    <td style="border: 1px solid #000;">{{item.product_writer}}</td>
-                    <td style="border: 1px solid #000;">{{item.product_date}}</td>
-                    <td style="border: 1px solid #000;">{{item.product_category}}</td>
-                    <td style="border: 1px solid #000;">{{item.product_explan}}</td>
-                    <td style="border: 1px solid #000;">{{item.product_hot}}</td>
-                    <td style="border: 1px solid #000;">{{item.product_ice}}</td>
-                    <td style="border: 1px solid #000;"><button @click="menuSelectOne(item)">수정</button></td>
-                    <td style="border: 1px solid #000;"><button @click="menuDelete(item.product_index)">삭제</button></td>
-                </tr>
-            </tbody>
-        </table>
     </div>
 </template>
 

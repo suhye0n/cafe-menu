@@ -28,29 +28,29 @@
             <button @click="removeSelectedItems()">삭제</button>
 
             <div v-if="cartList && cartList.length > 0">
-                <table style="border: 1px solid #000; text-align: center;">
+                <table>
                     <thead>
                         <tr>
-                            <th style="border: 1px solid #000;"><input type="checkbox" @change="toggleAll" v-model="allSelected"/></th>
-                            <th style="border: 1px solid #000;">카테고리</th>
-                            <th style="border: 1px solid #000;">상품명</th>
-                            <th style="border: 1px solid #000;">온도</th>
-                            <th style="border: 1px solid #000;">수량</th>
-                            <th style="border: 1px solid #000;">가격</th>
+                            <th><input type="checkbox" @change="toggleAll" v-model="allSelected" /></th>
+                            <th>카테고리</th>
+                            <th>상품명</th>
+                            <th>온도</th>
+                            <th>수량</th>
+                            <th>가격</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="(item, idx) in cartList" :key="idx">
-                            <td style="border: 1px solid #000;"><input type="checkbox" v-model="item.isSelected"/></td>
-                            <td style="border: 1px solid #000;">{{ item.product_category }}</td>
-                            <td style="border: 1px solid #000;">{{ item.product_name }}</td>
-                            <td style="border: 1px solid #000;">{{ item.product_temperature }}</td>
-                            <td style="border: 1px solid #000;">
+                            <td><input type="checkbox" v-model="item.isSelected" /></td>
+                            <td>{{ item.product_category }}</td>
+                            <td>{{ item.product_name }}</td>
+                            <td>{{ item.product_temperature }}</td>
+                            <td>
                                 <button @click="updateAmount(item, 'increase')">+</button>
                                 {{ item.order_amount }}
                                 <button @click="updateAmount(item, 'decrease')">-</button>
                             </td>
-                            <td style="border: 1px solid #000;">{{ item.product_price * item.order_amount }}</td>
+                            <td>{{ item.product_price * item.order_amount }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -85,6 +85,17 @@ const App = {
                 product_writer: null,
                 product_date: null,
                 product_amount: 1,
+            },
+
+            cart: {
+                order_product_number: 0,
+                order_product_name: null,
+                order_product_category: null,
+                order_product_temperature: null,
+                order_amount: 1,
+                order_price: 0,
+                order_date: null,
+                order_state: "진행중",
             },
 
             menuList: [],
@@ -130,7 +141,7 @@ const App = {
         },
 
         cartInsert: function (item, temperature) {
-            const existingItem = this.cartList.find(cartItem => 
+            const existingItem = this.cartList.find(cartItem =>
                 cartItem.product_name === item.product_name &&
                 cartItem.product_temperature === temperature
             );
@@ -176,61 +187,43 @@ const App = {
         },
 
         cartOrder: function () {
-            // 수정: 같은 order_product_number로 장바구니에 담긴 메뉴 각각 따로따로 /orderInsert.request로 전송
-            // order_product_number: 주문번호 동일,
-            // order_product_name: 로컬스토리지 1,
-            // order_product_category: 로컬스토리지 1,
-            // order_product_temperature: 로컬스토리지 1,
-            // order_amount: 로컬스토리지 1,
-            // order_price: 로컬스토리지 1,
-            // order_date: new Date().toISOString().slice(0, 10),
-            // order_state: "준비중",
-            // ------------------
-            // order_product_number: 주문번호 동일,
-            // order_product_name: 로컬스토리지 2,
-            // order_product_category: 로컬스토리지 2,
-            // order_product_temperature: 로컬스토리지 2,
-            // order_amount: 로컬스토리지 2,
-            // order_price: 로컬스토리지 2,
-            // order_date: new Date().toISOString().slice(0, 10),
-            // order_state: "준비중",
-
             let vm = this;
             const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
-
             if (storedCart.length === 0) {
                 alert("장바구니가 비어 있습니다.");
                 return;
             }
 
-            storedCart.forEach(item => {
-                item.order_product_number = vm.orderProductNumber;
-            });
+            Promise.all(storedCart.map(item => {
+                let orderData = {
+                    order_product_number: vm.orderProductNumber,
+                    order_product_name: item.product_name,
+                    order_product_category: item.product_category,
+                    order_product_temperature: item.product_temperature,
+                    order_amount: item.order_amount,
+                    order_price: item.product_price * item.order_amount,
+                    order_date: new Date().toISOString().slice(0, 10),
+                    order_state: "진행중"
+                };
 
-            axios({
-                url: '/orderInsert.request',
-                method: 'post',
-                headers: {
-                    "Content-Type": "application/json; charset=UTF-8",
-                },
-                data: {
-                cartItems: storedCart
-                },
-            }).then(function (response) {
-                if (response.data.result > 0) {
-                alert("주문이 완료되었습니다.");
-
-                vm.orderProductNumber++;
-
-                localStorage.removeItem("cart");
-                vm.menuSelectList();
-                } else {
-                alert("주문 실패. 다시 시도해 주세요.");
-                }
+                return axios({
+                    url: '/orderInsert.request',
+                    method: 'post',
+                    headers: {
+                        "Content-Type": "application/json; charset=UTF-8",
+                    },
+                    data: orderData
+                });
+            })).then(() => {
+                alert("주문이 완료되었습니다."); // 모든 주문이 완료된 후에 한 번만 출력
             }).catch(function (error) {
                 console.log('/orderInsert.request 에러 발생', error);
                 alert('주문 에러가 발생하였습니다. 관리자에게 문의바랍니다.');
-            })
+            });
+
+            vm.orderProductNumber++;
+            localStorage.removeItem("cart");
+            vm.menuSelectList();
         },
 
         updateAmount(item, action) {

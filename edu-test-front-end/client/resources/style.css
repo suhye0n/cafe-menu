@@ -1,5 +1,13 @@
 /* 공통 */
+@font-face {
+    font-family: 'NanumSquareNeo-Variable';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
 * {
+    font-family: 'NanumSquareNeo-Variable';
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -61,12 +69,13 @@ input[type="number"],
 textarea,
 button {
     padding: 10px;
-    margin: 5px 0;
+    margin: 5px 2px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
 button {
+    padding: 8px;
     background-color: pink;
     color: white;
     cursor: pointer;
@@ -75,6 +84,22 @@ button {
 button:disabled {
     background-color: #eee;
     cursor: not-allowed;
+}
+
+input[type="text"] {
+    padding: 11px;
+}
+
+textarea {
+    resize: none;
+}
+
+.margin {
+    margin: 20px 0;
+}
+
+.full {
+    width: 100%;
 }
 
 .container {
@@ -180,4 +205,10 @@ img {
     max-width: 800px;
     margin: 20px auto;
     padding: 20px;
+}
+
+/* 푸터 */
+.footer {
+    text-align: center;
+    font-size: 12px;
 }

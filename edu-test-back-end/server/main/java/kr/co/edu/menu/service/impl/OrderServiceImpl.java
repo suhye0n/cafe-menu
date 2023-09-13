@@ -18,6 +18,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public int orderInsert (HashMap<String, Object> param) {
+        System.out.println("test");
+        System.out.println(param);
         int insertCount = orderDAO.orderInsert(param);
         return insertCount;
     }

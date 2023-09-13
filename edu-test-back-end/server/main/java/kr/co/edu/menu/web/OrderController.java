@@ -1,6 +1,7 @@
 package kr.co.edu.menu.web;
 
 import kr.co.edu.menu.service.OrderService;
+import kr.co.edu.menu.service.impl.OrderServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,12 +14,11 @@ import java.util.List;
 
 @Controller
 public class OrderController {
-
     @Autowired
-    private OrderService orderService;
+    private OrderServiceImpl orderService;
 
     @RequestMapping(value = "/orderInsert.request", method = RequestMethod.POST)
-    public ModelAndView cartInsert (@RequestBody HashMap<String, Object> param) {
+    public ModelAndView orderInsert (@RequestBody HashMap<String, Object> param) {
         ModelAndView mav = new ModelAndView("jsonView");
         int insertCount = orderService.orderInsert(param);
         mav.addObject("result", insertCount);
