@@ -49,4 +49,12 @@ public class OrderController {
         return mav;
     }
 
+    @RequestMapping(value = "/getLastOrderNumber.request", method = RequestMethod.GET)
+    public ModelAndView getLastOrderNumber() {
+        ModelAndView mav = new ModelAndView("jsonView");
+        int lastOrderNumber = orderService.getLastOrderNumber();
+        mav.addObject("lastOrderNumber", lastOrderNumber);
+        return mav;
+    }
+
 }

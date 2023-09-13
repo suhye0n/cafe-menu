@@ -13,4 +13,6 @@ public interface OrderService {
 
     public int orderDelete (HashMap<String, Object> param);
 
+    public int getLastOrderNumber();
+
 }

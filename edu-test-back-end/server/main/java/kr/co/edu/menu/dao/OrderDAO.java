@@ -15,4 +15,6 @@ public interface OrderDAO {
     public int orderDelete(HashMap<String, Object> param);
 
     public List<HashMap<String, Object>> orderSelectList();
+
+    int getLastOrderNumber();
 }

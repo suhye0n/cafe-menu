@@ -43,6 +43,10 @@
         </if>
     </select>
 
+    <select id="getLastOrderNumber" resultType="int" parameterType="java.util.HashMap">
+        SELECT MAX(order_product_number) FROM product_order
+    </select>
+
     <update id="orderUpdate" parameterType="java.util.HashMap">
         UPDATE product_order
         SET
