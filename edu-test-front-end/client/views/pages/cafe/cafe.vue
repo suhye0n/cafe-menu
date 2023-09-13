@@ -37,6 +37,7 @@
         </div>
         <div>
             <button @click="handleButtonAction()">{{ buttonLabel }}</button>
+            <button class="button" id="addBtn" @click="resetForm()">취소</button>
         </div>
         <div>-------------------------------------------</div>
         <table style="border: 1px solid #000; text-align: center;">
