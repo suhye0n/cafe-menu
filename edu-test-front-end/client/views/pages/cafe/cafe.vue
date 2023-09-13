@@ -36,7 +36,7 @@
             상세 설명 : <textarea v-model="menu.product_explan" />
         </div>
         <div>
-            <button @click="menuInsert()">등록</button>
+            <button @click="handleButtonAction()">{{ buttonLabel }}</button>
         </div>
         <div>-------------------------------------------</div>
         <table style="border: 1px solid #000; text-align: center;">
@@ -64,7 +64,7 @@
                     <td style="border: 1px solid #000;">{{item.product_category}}</td>
                     <td style="border: 1px solid #000;">{{item.product_explan}}</td>
                     <td style="border: 1px solid #000;">{{item.product_temperature}}</td>
-                    <td style="border: 1px solid #000;"><button @click="menuUpdate(item)">수정</button></td>
+                    <td style="border: 1px solid #000;"><button @click="menuSelectOne(item)">수정</button></td>
                     <td style="border: 1px solid #000;"><button @click="menuDelete(item.product_index)">삭제</button></td>
                 </tr>
             </tbody>
@@ -81,6 +81,17 @@
                 testNumber: 1,
                 testString: '문자열',
 
+                emptyMenu: {
+                    product_index: null,
+                    product_name: null,
+                    product_category: null,
+                    product_price: null,
+                    product_writer: null,
+                    product_explan: null,
+                    product_temperature: 'ice',
+                    product_date: null
+                },
+
                 menu: {
                     product_name: null,
                     product_price: 0,
@@ -93,18 +104,13 @@
                     searchKeyword: "",
                 },
 
-                newData: {
-                    product_index: null,
-                    product_name: null,
-                    product_category: null,
-                    product_price: null,
-                    product_writer: null,
-                    product_explan: null,
-                    product_temperature: null,
-                    product_date: null
-                },
-
                 menuList: [],
+
+                selectedRow: null,
+
+                isEditMode: false,
+
+                categoryIce: ['ade', 'smoothie', 'frappuccino', 'coke']
             }
         },
         methods: {
@@ -123,6 +129,7 @@
                     if (response.data > 0) {
                         alert("상품이 등록되었습니다.");
                         vm.menuSelectList();
+                        vm.menu = vm.emptyMenu;
                     } else {
                         alert('등록된 메뉴가 없습니다.');
                     }
@@ -152,15 +159,41 @@
                 this.menuSelectList();
             },
 
+            menuSelectOne: function (item) {
+                this.selectedRow = item.product_index;
+
+                this.isEditMode = true;
+
+                this.menu = {
+                    product_index: item.product_index,
+                    product_name: item.product_name,
+                    product_category: item.product_category,
+                    product_price: item.product_price,
+                    product_writer: item.product_writer,
+                    product_explan: item.product_explan,
+                    product_temperature: item.product_temperature,
+                    product_date: item.product_date
+                };
+            },
+
+            resetForm: function () {
+                this.menu = this.emptyMenu;
+                this.isEditMode = false;
+            },
+
             menuUpdate: function (item) {
                 let vm = this;
                 axios({
                     url: '/menuUpdate.request',
                     method: 'post',
-                    data: item,
+                    headers: {
+                        "Content-Type": "application/json; charset=UTF-8",
+                    },
+                    data: vm.menu,
                 }).then(function (response) {
                     if (response.data > 0) {
                         vm.menuSelectList();
+                        vm.resetForm();
                     }
                 }).catch(function (error) {
                     console.log('/menuUpdate.request 에러 발생', error);
@@ -185,7 +218,40 @@
                     alert('메뉴 삭제 에러가 발생하였습니다.');
                 });
             },
+
+            handleButtonAction() {
+                if (!this.menu.product_name) {
+                    alert("상품명을 입력해 주세요.");
+                    return;
+                }
+
+                if (!this.menu.product_category) {
+                    alert("카테고리를 선택해 주세요.");
+                    return;
+                }
+
+                if (!this.menu.product_price) {
+                    alert("가격을 입력해 주세요.");
+                    return;
+                }
+
+                if (!this.menu.product_writer) {
+                    alert("작성자를 입력해 주세요.");
+                    return;
+                }
+
+                if (this.isEditMode) {
+                    this.menuUpdate();
+                } else {
+                    this.menuInsert();
+                }
+            },
             
+        },
+        computed: {
+            buttonLabel() {
+                return this.isEditMode ? '수정' : '등록';
+            }
         },
         mounted() {
             console.log('메뉴관리화면이 마운트 됨');
