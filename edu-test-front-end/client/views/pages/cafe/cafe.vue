@@ -116,6 +116,7 @@
                 isEditMode: false
             }
         },
+        
         methods: {
             menuInsert: function () {
                 let vm = this;

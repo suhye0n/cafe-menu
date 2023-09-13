@@ -31,7 +31,7 @@
                 <table style="border: 1px solid #000; text-align: center;">
                     <thead>
                         <tr>
-                            <th style="border: 1px solid #000;"></th>
+                            <th style="border: 1px solid #000;"><input type="checkbox" @change="toggleAll" v-model="allSelected"/></th>
                             <th style="border: 1px solid #000;">카테고리</th>
                             <th style="border: 1px solid #000;">상품명</th>
                             <th style="border: 1px solid #000;">온도</th>
@@ -41,7 +41,7 @@
                     </thead>
                     <tbody>
                         <tr v-for="(item, idx) in cartList" :key="idx">
-                            <td style="border: 1px solid #000;"><input type="checkbox" /></td>
+                            <td style="border: 1px solid #000;"><input type="checkbox" v-model="item.isSelected"/></td>
                             <td style="border: 1px solid #000;">{{ item.product_category }}</td>
                             <td style="border: 1px solid #000;">{{ item.product_name }}</td>
                             <td style="border: 1px solid #000;">{{ item.product_temperature }}</td>
@@ -58,9 +58,7 @@
             <div v-else>
                 <p>장바구니가 비어있습니다.</p>
             </div>
-            <!-- 수정: 합계 -->
             <p>합계: {{ totalAmount }}원</p>
-            <!-- // 수정 -->
 
             <button @click="cartOrder()">주문하기</button>
         </div>
@@ -75,6 +73,7 @@ const App = {
         return {
             testNumber: 1,
             testString: '문자열',
+            orderProductNumber: 1,
 
             menu: {
                 product_name: null,
@@ -87,22 +86,13 @@ const App = {
                 product_amount: 1,
             },
 
-            cart: {
-                order_product_number: 0,
-                order_product_name: null,
-                order_product_category: null,
-                order_product_temperature: null,
-                order_amount: 1,
-                order_price: 0,
-                order_date: null,
-                order_state: "준비중",
-            },
-
             menuList: [],
 
             cartList: [],
 
             selectedRow: null,
+
+            allSelected: false,
         }
     },
 
@@ -132,6 +122,12 @@ const App = {
             vm.cartList = storedCart;
         },
 
+        toggleAll() {
+            this.cartList.forEach((item) => {
+                item.isSelected = this.allSelected;
+            });
+        },
+
         cartInsert: function (item, temperature) {
             let newCartItem = {
                 ...item,
@@ -140,30 +136,91 @@ const App = {
             };
 
             const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+            console.log(storedCart);
             storedCart.push(newCartItem);
             localStorage.setItem("cart", JSON.stringify(storedCart));
             this.menuSelectList();
         },
 
-        cartOrder: function () {
+
+        menuInsert: function () {
             let vm = this;
-            vm.menu.product_date = new Date().toISOString().slice(0, 10);
             axios({
-                url: '/cartInsert.request',
+                url: '/menuInsert.request',
                 method: 'post',
                 header: {
                     "Content-Type": "application/json; charset=UTF-8",
                 },
                 data: vm.menu,
             }).then(function (response) {
-                console.log('/cartInsert.request의 response 결과 값 : ' + response);
+                console.log('/menuInsert.request의 response 결과 값 : ' + response);
                 if (response.data > 0) {
-                    alert("주문이 완료되었습니다.");
+                    alert("상품이 등록되었습니다.");
                     vm.menuSelectList();
                     vm.menu = vm.emptyMenu;
+                } else {
+                    alert('등록된 메뉴가 없습니다.');
                 }
             }).catch(function (error) {
                 console.log('/menuInsert.request 에러 발생', error);
+                alert('메뉴 등록 에러가 발생하였습니다. 관리자에게 문의바랍니다.');
+            })
+        },
+
+        cartOrder: function () {
+            // 수정: 같은 order_product_number로 장바구니에 담긴 메뉴 각각 따로따로 /orderInsert.request로 전송
+            // order_product_number: 주문번호 동일,
+            // order_product_name: 로컬스토리지 1,
+            // order_product_category: 로컬스토리지 1,
+            // order_product_temperature: 로컬스토리지 1,
+            // order_amount: 로컬스토리지 1,
+            // order_price: 로컬스토리지 1,
+            // order_date: new Date().toISOString().slice(0, 10),
+            // order_state: "준비중",
+            // ------------------
+            // order_product_number: 주문번호 동일,
+            // order_product_name: 로컬스토리지 2,
+            // order_product_category: 로컬스토리지 2,
+            // order_product_temperature: 로컬스토리지 2,
+            // order_amount: 로컬스토리지 2,
+            // order_price: 로컬스토리지 2,
+            // order_date: new Date().toISOString().slice(0, 10),
+            // order_state: "준비중",
+
+            let vm = this;
+            const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+
+            if (storedCart.length === 0) {
+                alert("장바구니가 비어 있습니다.");
+                return;
+            }
+
+            storedCart.forEach(item => {
+                item.order_product_number = vm.orderProductNumber;
+            });
+
+            axios({
+                url: '/orderInsert.request',
+                method: 'post',
+                headers: {
+                    "Content-Type": "application/json; charset=UTF-8",
+                },
+                data: {
+                cartItems: storedCart
+                },
+            }).then(function (response) {
+                if (response.data.result > 0) {
+                alert("주문이 완료되었습니다.");
+
+                vm.orderProductNumber++;
+
+                localStorage.removeItem("cart");
+                vm.menuSelectList();
+                } else {
+                alert("주문 실패. 다시 시도해 주세요.");
+                }
+            }).catch(function (error) {
+                console.log('/orderInsert.request 에러 발생', error);
                 alert('주문 에러가 발생하였습니다. 관리자에게 문의바랍니다.');
             })
         },
