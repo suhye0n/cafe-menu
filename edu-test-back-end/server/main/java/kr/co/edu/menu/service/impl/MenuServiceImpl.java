@@ -22,11 +22,6 @@ public class MenuServiceImpl implements MenuService {
         return insertCount;
     }
 
-//    @Override
-//    public List<HashMap<String, Object>> menuSelectList(HashMap<String, Object> param) {
-//        return menuDAO.menuSelectList(param);
-//    }
-
     @Override
     public List<HashMap<String, Object>> menuSelectList() {
         return menuDAO.menuSelectList();
@@ -42,6 +37,16 @@ public class MenuServiceImpl implements MenuService {
     public int menuDelete(HashMap<String, Object> param) {
         int result = menuDAO.menuDelete(param);
         return result;
+    }
+
+//    @Override
+//    public List<HashMap<String, Object>> menuSelectList(HashMap<String, Object> param) {
+//        return menuDAO.menuSelectList(param);
+//    }
+
+    @Override
+    public List<HashMap<String, Object>> menuSearch (HashMap<String, Object> param) {
+        return menuDAO.menuSearch(param);
     }
 
 }

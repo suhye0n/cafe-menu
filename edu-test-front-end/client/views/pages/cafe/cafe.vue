@@ -1,15 +1,20 @@
 <template>
     <div class="cafe">
-        <div>
-            <select v-model="searchType">
-                <option value="상품명">상품명</option>
-                <option value="작성자">작성자</option>
-                <option value="작성일">작성일</option>
+        <div class="search-section">
+            <select v-model="selectedSearchOption">
+                <option value="product_name">상품명</option>
+                <option value="product_writer">작성자</option>
+                <option value="product_date">작성일</option>
             </select>
-            <input type="text" v-model="searchKeyword" placeholder="입력해주세요.">
-            <button @click="menuSearch()">검색</button>
+
+            <input v-if="selectedSearchOption === 'product_date'" type="date" v-model="searchKeyword"
+                @keyup.enter="dataSearch" />
+
+            <input v-else type="text" v-model="searchKeyword" placeholder="검색..." @keyup.enter="dataSearch" />
+
+            <button @click="dataSearch()">검색</button>
         </div>
-        
+
         <hr />
 
         <div class="container">
@@ -64,15 +69,15 @@
                 </thead>
                 <tbody>
                     <tr v-for="(item, idx) in menuList">
-                        <td>{{idx}}</td>
-                        <td>{{item.product_name}}</td>
-                        <td>{{item.product_price}}</td>
-                        <td>{{item.product_writer}}</td>
-                        <td>{{item.product_date}}</td>
-                        <td>{{item.product_category}}</td>
-                        <td>{{item.product_explan}}</td>
-                        <td>{{item.product_hot}}</td>
-                        <td>{{item.product_ice}}</td>
+                        <td>{{ idx }}</td>
+                        <td>{{ item.product_name }}</td>
+                        <td>{{ item.product_price }}</td>
+                        <td>{{ item.product_writer }}</td>
+                        <td>{{ item.product_date }}</td>
+                        <td>{{ item.product_category }}</td>
+                        <td>{{ item.product_explan }}</td>
+                        <td>{{ item.product_hot }}</td>
+                        <td>{{ item.product_ice }}</td>
                         <td><button @click="menuSelectOne(item)">수정</button></td>
                         <td><button @click="menuDelete(item.product_index)">삭제</button></td>
                     </tr>
@@ -83,193 +88,216 @@
 </template>
 
 <script>
-    import axios from 'axios';
+import axios from 'axios';
 
-    const App = {
-        data: () => {
-            return {
-                testNumber: 1,
-                testString: '문자열',
+const App = {
+    data: () => {
+        return {
+            testNumber: 1,
+            testString: '문자열',
 
-                emptyMenu: {
-                    product_index: null,
-                    product_name: null,
-                    product_category: null,
-                    product_price: null,
-                    product_writer: null,
-                    product_explan: null,
-                    product_ice: false,
-                    product_hot: false,
-                    product_date: null
+            emptyMenu: {
+                product_index: null,
+                product_name: null,
+                product_category: null,
+                product_price: null,
+                product_writer: null,
+                product_explan: null,
+                product_ice: false,
+                product_hot: false,
+                product_date: null
+            },
+
+            menu: {
+                product_name: null,
+                product_price: 0,
+                product_category: null,
+                product_explan: null,
+                product_ice: false,
+                product_hot: false,
+                product_writer: null,
+                product_date: null,
+            },
+
+            searchKeyword: "",
+            selectedSearchOption: 'product_name',
+
+            menuList: [],
+            dataList: [],
+
+            selectedRow: null,
+
+            isEditMode: false
+        }
+    },
+
+    methods: {
+        menuInsert: function () {
+            let vm = this;
+            vm.menu.product_date = new Date().toISOString().slice(0, 10);
+            axios({
+                url: '/menuInsert.request',
+                method: 'post',
+                header: {
+                    "Content-Type": "application/json; charset=UTF-8",
                 },
-
-                menu: {
-                    product_name: null,
-                    product_price: 0,
-                    product_category: null,
-                    product_explan: null,
-                    product_ice: false,
-                    product_hot: false,
-                    product_writer: null,
-                    product_date: null,
-                    searchType: "상품명",
-                    searchKeyword: "",
-                },
-
-                menuList: [],
-
-                selectedRow: null,
-
-                isEditMode: false
-            }
-        },
-
-        methods: {
-            menuInsert: function () {
-                let vm = this;
-                vm.menu.product_date = new Date().toISOString().slice(0, 10);
-                axios({
-                    url: '/menuInsert.request',
-                    method: 'post',
-                    header: {
-                        "Content-Type": "application/json; charset=UTF-8",
-                    },
-                    data: vm.menu,
-                }).then(function (response) {
-                    console.log('/menuInsert.request의 response 결과 값 : ' + response);
-                    if (response.data > 0) {
-                        alert("상품이 등록되었습니다.");
-                        vm.menuSelectList();
-                        vm.menu = vm.emptyMenu;
-                    } else {
-                        alert('등록된 메뉴가 없습니다.');
-                    }
-                }).catch(function (error) {
-                    console.log('/menuInsert.request 에러 발생', error);
-                    alert('메뉴 등록 에러가 발생하였습니다. 관리자에게 문의바랍니다.');
-                })
-            },
-
-            menuSelectList: function () {
-                let vm = this;
-                let searchParams = {
-                    searchType: vm.searchType,
-                    searchKeyword: vm.searchKeyword,
-                };
-
-                axios({
-                    url: '/menuSelectList.request',
-                    method: 'get',
-                    params: searchParams,
-                }).then(function (response) {
-                    vm.menuList = response.data;
-                });
-            },
-
-            menuSearch: function () {
-                this.menuSelectList();
-            },
-
-            menuSelectOne: function (item) {
-                this.selectedRow = item.product_index;
-
-                this.isEditMode = true;
-
-                this.menu = {
-                    product_index: item.product_index,
-                    product_name: item.product_name,
-                    product_category: item.product_category,
-                    product_price: item.product_price,
-                    product_writer: item.product_writer,
-                    product_explan: item.product_explan,
-                    product_hot: item.product_hot,
-                    product_ice: item.product_ice,
-                    product_date: item.product_date
-                };
-            },
-
-            resetForm: function () {
-                this.menu = this.emptyMenu;
-                this.isEditMode = false;
-            },
-
-            menuUpdate: function (item) {
-                let vm = this;
-                axios({
-                    url: '/menuUpdate.request',
-                    method: 'post',
-                    headers: {
-                        "Content-Type": "application/json; charset=UTF-8",
-                    },
-                    data: vm.menu,
-                }).then(function (response) {
-                    if (response.data > 0) {
-                        vm.menuSelectList();
-                        vm.resetForm();
-                    }
-                }).catch(function (error) {
-                    console.log('/menuUpdate.request 에러 발생', error);
-                    alert('메뉴 수정 에러가 발생하였습니다.');
-                });
-            },
-
-            menuDelete: function (item) {
-                console.log(item);
-                let vm = this;
-                axios({
-                    url: '/menuDelete.request',
-                    method: 'post',
-                    data: { product_index: item },
-                }).then(function (response) {
-                    alert('메뉴 삭제가 완료되었습니다.');
-                    console.log(response);
-                    if (response.data > 0) {
-                        vm.menuSelectList();
-                    }
-                }).catch(function (error) {
-                    alert('메뉴 삭제 에러가 발생하였습니다.');
-                });
-            },
-
-            handleButtonAction() {
-                if (!this.menu.product_name) {
-                    alert("상품명을 입력해 주세요.");
-                    return;
-                }
-
-                if (!this.menu.product_category) {
-                    alert("카테고리를 선택해 주세요.");
-                    return;
-                }
-
-                if (!this.menu.product_price) {
-                    alert("가격을 입력해 주세요.");
-                    return;
-                }
-
-                if (!this.menu.product_writer) {
-                    alert("작성자를 입력해 주세요.");
-                    return;
-                }
-
-                if (this.isEditMode) {
-                    this.menuUpdate();
+                data: vm.menu,
+            }).then(function (response) {
+                console.log('/menuInsert.request의 response 결과 값 : ' + response);
+                if (response.data > 0) {
+                    alert("상품이 등록되었습니다.");
+                    vm.menuSelectList();
+                    vm.menu = vm.emptyMenu;
                 } else {
-                    this.menuInsert();
+                    alert('등록된 메뉴가 없습니다.');
                 }
-            },
-            
+            }).catch(function (error) {
+                console.log('/menuInsert.request 에러 발생', error);
+                alert('메뉴 등록 에러가 발생하였습니다. 관리자에게 문의바랍니다.');
+            })
         },
-        computed: {
-            buttonLabel() {
-                return this.isEditMode ? '수정' : '등록';
+
+        menuSelectList: function () {
+            let vm = this;
+
+            axios({
+                url: '/menuSelectList.request',
+                method: 'get',
+            }).then(function (response) {
+                vm.menuList = response.data;
+            });
+        },
+
+        dataSearch() {
+            const vm = this;
+            let searchPayload = {
+                keyword: vm.searchKeyword,
+                option: vm.selectedSearchOption
+            };
+            axios({
+                url: "/menuSearch.request",
+                method: "post",
+                headers: { // 'header'를 'headers'로 변경
+                    "Content-Type": "application/json; charset=UTF-8",
+                },
+                data: searchPayload,  // 검색어를 함께 전송
+            })
+            .then(function (response) {
+                console.log("dataSearch - response : ", response.data);
+                vm.dataList = response.data; // 수정
+            })
+            .catch(function (error) {
+                console.log("dataSearch - error : ", error);
+                alert("상품 검색에 오류가 발생했습니다.");
+            });
+        },
+
+        menuSelectOne: function (item) {
+            this.selectedRow = item.product_index;
+
+            this.isEditMode = true;
+
+            this.menu = {
+                product_index: item.product_index,
+                product_name: item.product_name,
+                product_category: item.product_category,
+                product_price: item.product_price,
+                product_writer: item.product_writer,
+                product_explan: item.product_explan,
+                product_hot: item.product_hot,
+                product_ice: item.product_ice,
+                product_date: item.product_date
+            };
+        },
+
+        resetForm: function () {
+            this.menu = this.emptyMenu;
+            this.isEditMode = false;
+        },
+
+        menuUpdate: function (item) {
+            let vm = this;
+            axios({
+                url: '/menuUpdate.request',
+                method: 'post',
+                headers: {
+                    "Content-Type": "application/json; charset=UTF-8",
+                },
+                data: vm.menu,
+            }).then(function (response) {
+                if (response.data > 0) {
+                    vm.menuSelectList();
+                    vm.resetForm();
+                }
+            }).catch(function (error) {
+                console.log('/menuUpdate.request 에러 발생', error);
+                alert('메뉴 수정 에러가 발생하였습니다.');
+            });
+        },
+
+        menuDelete: function (item) {
+            console.log(item);
+            let vm = this;
+            axios({
+                url: '/menuDelete.request',
+                method: 'post',
+                data: { product_index: item },
+            }).then(function (response) {
+                alert('메뉴 삭제가 완료되었습니다.');
+                console.log(response);
+                if (response.data > 0) {
+                    vm.menuSelectList();
+                }
+            }).catch(function (error) {
+                alert('메뉴 삭제 에러가 발생하였습니다.');
+            });
+        },
+
+        handleButtonAction() {
+            if (!this.menu.product_name) {
+                alert("상품명을 입력해 주세요.");
+                return;
+            }
+
+            if (!this.menu.product_category) {
+                alert("카테고리를 선택해 주세요.");
+                return;
+            }
+
+            if (!this.menu.product_price) {
+                alert("가격을 입력해 주세요.");
+                return;
+            }
+
+            if (!this.menu.product_writer) {
+                alert("작성자를 입력해 주세요.");
+                return;
+            }
+
+            if (this.isEditMode) {
+                this.menuUpdate();
+            } else {
+                this.menuInsert();
             }
         },
-        mounted() {
-            console.log('메뉴관리화면이 마운트 됨');
-            this.menuSelectList();
-        },
-    }
 
-    export default App;
+    },
+    watch: {
+        // selectedSearchOption 데이터 변경 시 실행
+        "selectedSearchOption": function (newValue, oldValue) {
+            this.searchKeyword = ""; // 검색어 초기화
+        }
+    },
+    computed: {
+        buttonLabel() {
+            return this.isEditMode ? '수정' : '등록';
+        }
+    },
+    mounted() {
+        console.log('메뉴관리화면이 마운트 됨');
+        this.menuSelectList();
+    },
+}
+
+export default App;
 </script>

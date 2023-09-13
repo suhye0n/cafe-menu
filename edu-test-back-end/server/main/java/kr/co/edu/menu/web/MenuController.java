@@ -66,4 +66,13 @@ public class MenuController {
         return mav;
     }
 
+    @RequestMapping(value = "/menuSearch.request", method = RequestMethod.POST)
+    public ModelAndView menuSearch(@RequestBody HashMap<String, Object> param) {
+        System.out.println(param);
+        ModelAndView mav = new ModelAndView("jsonView");
+        List<HashMap<String, Object>> results = menuService.menuSearch(param);
+        mav.addObject("result", results);
+        return mav;
+    }
+
 }
