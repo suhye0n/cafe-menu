@@ -1,36 +1,61 @@
 <template>
-    <div>
-        메인화면입니다.
-    </div>
-
-    <!-- 수정: 이미지 왼쪽/오른쪽 컨트롤러로도 슬라이드 할 수 있고, 하단 동그라미 페이징 버튼 눌러서도 슬라이드 할 수 있도록... -->
     <div class="slide">
         <ul class="slides">
-            <li><img src="/client/resources/img/1.jpg" /></li>
-            <li><img src="/client/resources/img/2.jpg" /></li>
-            <li><img src="/client/resources/img/3.jpg" /></li>
+            <li :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
+                <img src="/client/resources/img/1.jpg" />
+            </li>
+            <li :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
+                <img src="/client/resources/img/2.jpg" />
+            </li>
+            <li :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
+                <img src="/client/resources/img/3.jpg" />
+            </li>
         </ul>
         <p class="controller">
-            <span class="prev">&lang;</span>
-            <span class="next">&rang;</span>
+            <span @click="prevSlide">&lang;</span>
+            <span @click="nextSlide">&rang;</span>
+        </p>
+        <p class="pagination">
+            <span v-for="(slide, index) in slides" :key="index" :class="{ active: index === currentIndex }"
+                @click="goToSlide(index)"></span>
         </p>
     </div>
-    <!-- // 수정 -->
-
 </template>
 
 <script>
-    const App = {
-        data: () => {
-            return {
-                testNumber: 1,
-                testString: '문자열'
+export default {
+    data() {
+        return {
+            currentIndex: 0,
+            slides: [1, 2, 3],
+            timer: null,
+        };
+    },
+    methods: {
+        nextSlide() {
+            if (this.currentIndex < this.slides.length - 1) {
+                this.currentIndex++;
+            } else {
+                this.currentIndex = 0;
             }
         },
-        mounted() {
-            console.log('메인화면이 마운트 됨');
+        prevSlide() {
+            if (this.currentIndex > 0) {
+                this.currentIndex--;
+            } else {
+                this.currentIndex = this.slides.length - 1;
+            }
         },
-    }
-
-    export default App;
+        goToSlide(index) {
+            this.currentIndex = index;
+        },
+    },
+    mounted() {
+        console.log('메인화면이 마운트 됨');
+        this.timer = setInterval(this.nextSlide, 5000);
+    },
+    beforeDestroy() {
+        clearInterval(this.timer);
+    },
+}
 </script>
