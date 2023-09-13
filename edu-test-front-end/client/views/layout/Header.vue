@@ -1,7 +1,7 @@
 <template>
     <div class="header">
-        <span style="margin-right: 10px">
-            <router-link to="/">메인</router-link>
+        <span style="margin-right: 50px">
+            <router-link to="/">카페 메뉴관리</router-link>
         </span>
         <span style="margin-right: 10px">
             <router-link to="/cafe.page">메뉴관리</router-link>
