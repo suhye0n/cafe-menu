@@ -16,10 +16,8 @@
                     <td style="border: 1px solid #000;">{{ item.product_name }}</td>
                     <td style="border: 1px solid #000;">{{ item.product_price }}</td>
                     <td style="border: 1px solid #000;">
-                        <!-- 수정: 아이스 클릭하면 order_product_temperature 아이스로.. -->
                         <button @click="cartInsert(item, '핫')">핫</button>
                         <button @click="cartInsert(item, '아이스')">아이스</button>
-                        <!-- // 수정 -->
                     </td>
                 </tr>
             </tbody>
@@ -27,9 +25,7 @@
 
         <div>
             <h3>장바구니</h3>
-            <!-- 수정: 삭제 버튼 누르면 체크박스 체크된 아이템들 로컬스토리지에서 제거 및 장바구니에서 제거 -->
             <button @click="removeSelectedItems()">삭제</button>
-            <!-- // 수정 -->
 
             <div v-if="cartList && cartList.length > 0">
                 <table style="border: 1px solid #000; text-align: center;">
@@ -50,13 +46,11 @@
                             <td style="border: 1px solid #000;">{{ item.product_name }}</td>
                             <td style="border: 1px solid #000;">{{ item.product_temperature }}</td>
                             <td style="border: 1px solid #000;">
-                                <!-- 수정: +, - 버튼 누르면 order_amount 로컬스토리지 및 여기 화면에서 감소 -->
                                 <button @click="updateAmount(item, 'increase')">+</button>
                                 {{ item.order_amount }}
                                 <button @click="updateAmount(item, 'decrease')">-</button>
-                                <!-- // 수정 -->
                             </td>
-                            <td style="border: 1px solid #000;">{{ item.product_price }}</td>
+                            <td style="border: 1px solid #000;">{{ item.product_price * item.order_amount }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -111,6 +105,13 @@ const App = {
             selectedRow: null,
         }
     },
+
+    computed: {
+        totalAmount() {
+            return this.cartList.reduce((acc, item) => acc + (item.product_price * item.order_amount), 0);
+        }
+    },
+
     methods: {
         menuSelectList: function () {
             let vm = this;
@@ -167,70 +168,39 @@ const App = {
             })
         },
 
-        menuSelectOne: function (item) {
-            this.selectedRow = item.product_index;
+        updateAmount(item, action) {
+            const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
 
-            this.isEditMode = true;
+            const updatedCart = storedCart.map(cartItem => {
+                if (cartItem.product_name === item.product_name &&
+                    cartItem.product_temperature === item.product_temperature) {
+                    if (action === 'increase') {
+                        cartItem.order_amount++;
+                    } else if (action === 'decrease' && cartItem.order_amount > 1) {
+                        cartItem.order_amount--;
+                    }
+                }
+                return cartItem;
+            });
 
-            this.menu = {
-                product_index: item.product_index,
-                product_name: item.product_name,
-                product_category: item.product_category,
-                product_price: item.product_price,
-                product_writer: item.product_writer,
-                product_explan: item.product_explan,
-                product_temperature: item.product_temperature,
-                product_date: item.product_date
-            };
+            localStorage.setItem("cart", JSON.stringify(updatedCart));
+            this.menuSelectList();
         },
 
-        menuDelete: function (item) {
-            console.log(item);
-            let vm = this;
-            localStorage.removeItem();
-        },
+        removeSelectedItems() {
+            const checkboxes = document.querySelectorAll("input[type='checkbox']:checked");
+            const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
 
-        handleButtonAction() {
-            if (!this.menu.product_name) {
-                alert("상품명을 입력해 주세요.");
-                return;
-            }
+            checkboxes.forEach(checkbox => {
+                const index = parseInt(checkbox.parentElement.parentElement.rowIndex - 1);
+                storedCart.splice(index, 1);
+            });
 
-            if (!this.menu.product_category) {
-                alert("카테고리를 선택해 주세요.");
-                return;
-            }
-
-            if (!this.menu.product_price) {
-                alert("가격을 입력해 주세요.");
-                return;
-            }
-
-            if (!this.menu.product_writer) {
-                alert("작성자를 입력해 주세요.");
-                return;
-            }
-
-            if (this.isEditMode) {
-                this.menuUpdate();
-            } else {
-                this.menuInsert();
-            }
-        },
-
-    },
-    watch: {
-        "menu.product_category": function (newValue, oldValue) {
-            if (this.categoryIce.includes(this.menu.product_category)) {
-                this.menu.product_temperature = "ice";
-            }
+            localStorage.setItem("cart", JSON.stringify(storedCart));
+            this.menuSelectList();
         }
     },
-    computed: {
-        buttonLabel() {
-            return this.isEditMode ? '수정' : '등록';
-        }
-    },
+
     mounted() {
         console.log('메뉴관리화면이 마운트 됨');
         this.menuSelectList();
