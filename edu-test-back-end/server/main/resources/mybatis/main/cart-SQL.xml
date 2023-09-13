@@ -43,6 +43,14 @@
         </if>
     </select>
 
+    <update id="orderUpdate" parameterType="java.util.HashMap">
+        UPDATE product_order
+        SET
+            order_state =  #{order_state}
+        WHERE
+            order_product_number = #{order_product_number}
+    </update>
+
     <delete id="orderDelete" parameterType="java.util.HashMap">
         DELETE
         FROM

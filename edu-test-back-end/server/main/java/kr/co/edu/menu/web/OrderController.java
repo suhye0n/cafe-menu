@@ -34,7 +34,7 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/orderUpdate.request", method = RequestMethod.POST)
-    public ModelAndView menuUpdate(@RequestBody HashMap<String, Object> param) {
+    public ModelAndView orderUpdate(@RequestBody HashMap<String, Object> param) {
         System.out.println(param);
         ModelAndView mav = new ModelAndView("jsonView");
         mav.addObject("result", orderService.orderUpdate(param));

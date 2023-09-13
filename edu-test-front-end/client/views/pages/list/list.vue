@@ -3,7 +3,7 @@
         <h3>주문 상세</h3>
 
         <div v-for="(groupedOrder, orderNumber) in groupedOrders">
-            <fieldset>
+            <fieldset v-show="isOrderInProgress[orderNumber]">
                 <legend>주문 번호: {{ orderNumber }}번</legend>
 
                 <table style="border: 1px solid #000; text-align: center;">
@@ -58,7 +58,7 @@
                             {{ groupedOrder.reduce((sum, item) => sum + item.order_price, 0) }}
                         </td>
                         <td style="border: 1px solid #000;">{{ groupedOrder[0].order_date }}</td>
-                        <td style="border: 1px solid #000;">진행중</td>
+                        <td style="border: 1px solid #000;">{{ groupedOrder[0].order_state }}</td>
                     </tr>
                 </template>
             </tbody>
@@ -86,6 +86,13 @@ const App = {
                 return acc;
             }, {});
         },
+        isOrderInProgress() {
+            return Object.keys(this.groupedOrders).reduce((acc, orderNumber) => {
+                const orders = this.groupedOrders[orderNumber];
+                acc[orderNumber] = orders.some(order => order.order_state === "진행중");
+                return acc;
+            }, {});
+        }
     },
     methods: {
         orderInsert: function () {
@@ -158,21 +165,21 @@ const App = {
         orderUpdate: function (orderNumber) {
             let vm = this;
             axios({
-                url: '/orderUpdateState.request',
+                url: '/orderUpdate.request',
                 method: 'post',
                 headers: {
                     "Content-Type": "application/json; charset=UTF-8",
                 },
-                data: { order_product_number: orderNumber, order_state: '완료' }, // 상태와 주문 번호를 전달
+                data: { order_product_number: orderNumber, order_state: '완료' },
             }).then(function (response) {
                 if (response.data > 0) {
                     alert('주문이 완료 처리되었습니다.');
-                    vm.orderSelectList(); // 주문 리스트를 다시 로드
+                    vm.orderSelectList();
                 } else {
                     alert('주문 완료 처리에 실패했습니다.');
                 }
             }).catch(function (error) {
-                console.log('/orderUpdateState.request 에러 발생', error);
+                console.log('/orderUpdate.request 에러 발생', error);
                 alert('주문 완료 처리에 에러가 발생하였습니다.');
             });
         },
