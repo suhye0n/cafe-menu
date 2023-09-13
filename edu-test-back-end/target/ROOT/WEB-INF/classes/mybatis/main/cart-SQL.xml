@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.edu.menu.dao.OrderDAO">
+
+    <insert id="cartInsert" parameterType="java.util.HashMap">
+        INSERT INTO product_order (
+                              order_product_number
+                            , order_product_name
+                            , order_product_category
+                            , order_product_temperature
+                            , order_amount
+                            , order_price
+                            , order_date
+                            , order_state
+        ) VALUES (
+                #{order_product_number}
+                 , #{order_product_name}
+                 , #{order_product_category}
+                 , #{order_product_temperature}
+                 , #{order_amount}
+                 , #{order_price}
+                 , CAST(#{order_date} AS DATE)
+                 , #{order_state}
+                 )
+    </insert>
+
+    <select id="cartSelectList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+        SELECT
+        order_product_number
+        , order_product_name
+        , order_product_category
+        , order_product_temperature
+        , order_amount
+        , order_price
+        , order_date
+        , order_state
+        FROM
+        product_order
+        <if test="product_name != null and product_name != ''">
+            WHERE
+            order_product_number like #{order_product_number}
+        </if>
+    </select>
+
+    <delete id="cartDelete" parameterType="java.util.HashMap">
+        DELETE
+        FROM
+            product_order
+        WHERE
+            product_index = #{order_index}
+    </delete>
+</mapper>

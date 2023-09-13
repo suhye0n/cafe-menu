@@ -1,76 +1,49 @@
 <template>
-    <div class="cafe">
-        <div>
-            <select v-model="searchType">
-                <option value="상품명">상품명</option>
-                <option value="작성자">작성자</option>
-                <option value="작성일">작성일</option>
-            </select>
-            <input type="text" v-model="searchKeyword" placeholder="입력해주세요.">
-            <button @click="menuSearch()">검색</button>
-        </div>
-        <div>
-            상품명:
-            <input type="text" v-model="menu.product_name">
-        </div>
-        <div>
-            카테고리 : 
-            <input type="radio" name="category" value="아메리카노" v-model="menu.product_category">아메리카노
-            <input type="radio" name="category" value="카페라떼" v-model="menu.product_category">카페라떼
-            <input type="radio" name="category" value="에이드" v-model="menu.product_category">에이드
-            <input type="radio" name="category" value="스무디" v-model="menu.product_category">스무디
-            <input type="radio" name="category" value="프라푸치노" v-model="menu.product_category">프라푸치노
-            <input type="radio" name="category" value="콜라" v-model="menu.product_category">콜라
-        </div>
-        <div>
-            가격 : <input type="number" v-model="menu.product_price">
-        </div>
-        <div>
-            작성자 : <input type="text" v-model="menu.product_writer">
-        </div>
-        <div>
-            <!-- 수정: 라디오 대신 체크박스로 변경해서 여러개 선택할 수 있도록... -->
-            <input type="radio" name="temp" value="아이스" v-model="menu.product_temperature">아이스
-            <input type="radio" name="temp" value="핫" v-model="menu.product_temperature">핫
-        </div>
-        <div>
-            상세 설명 : <textarea v-model="menu.product_explan" />
-        </div>
-        <div>
-            <button @click="handleButtonAction()">{{ buttonLabel }}</button>
-            <button class="button" id="addBtn" @click="resetForm()">취소</button>
-        </div>
-        <div>-------------------------------------------</div>
+    <div>
+        <h1>상품 주문</h1>
         <table style="border: 1px solid #000; text-align: center;">
             <thead>
                 <tr>
                     <th style="border: 1px solid #000;">NO</th>
                     <th style="border: 1px solid #000;">상품명</th>
                     <th style="border: 1px solid #000;">메뉴가격(단위:원)</th>
-                    <th style="border: 1px solid #000;">작성자</th>
-                    <th style="border: 1px solid #000;">작성일</th>
-                    <th style="border: 1px solid #000;">카테고리</th>
-                    <th style="border: 1px solid #000;">설명</th>
-                    <th style="border: 1px solid #000;">핫/아이스</th>
-                    <th style="border: 1px solid #000;">수정</th>
-                    <th style="border: 1px solid #000;">삭제</th>
+                    <th style="border: 1px solid #000;">담기</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(item, idx) in menuList">
+                <tr v-for="(item, idx) in cartList">
                     <td style="border: 1px solid #000;">{{idx}}</td>
                     <td style="border: 1px solid #000;">{{item.product_name}}</td>
                     <td style="border: 1px solid #000;">{{item.product_price}}</td>
-                    <td style="border: 1px solid #000;">{{item.product_writer}}</td>
-                    <td style="border: 1px solid #000;">{{item.product_date}}</td>
-                    <td style="border: 1px solid #000;">{{item.product_category}}</td>
-                    <td style="border: 1px solid #000;">{{item.product_explan}}</td>
-                    <td style="border: 1px solid #000;">{{item.product_temperature}}</td>
-                    <td style="border: 1px solid #000;"><button @click="menuSelectOne(item)">수정</button></td>
-                    <td style="border: 1px solid #000;"><button @click="menuDelete(item.product_index)">삭제</button></td>
+                    <td style="border: 1px solid #000;">
+                        <button @click="cartInsert(item)">핫</button>
+                        <button @click="cartInsert(item)">아이스</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
+
+        <div>
+            <h3>장바구니</h3>
+            <button>삭제</button>
+
+            <!-- 수정: 로컬스토리지에 저장된 아이템 표시 -->
+            <table style="border: 1px solid #000; text-align: center;">
+                <tbody>
+                    <tr v-for="(item, idx) in cartList">
+                        <td style="border: 1px solid #000;">
+                            <input type="checkbox" />
+                        </td>
+                        <td style="border: 1px solid #000;">아메리카노</td>
+                        <td style="border: 1px solid #000;">아메리카노</td>
+                        <td style="border: 1px solid #000;">아이스</td>
+                        <td style="border: 1px solid #000;">2</td>
+                        <td style="border: 1px solid #000;">4000</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button>주문하기</button>
+        </div>
     </div>
 </template>
 
@@ -106,15 +79,13 @@
                     searchKeyword: "",
                 },
 
-                menuList: [],
+                cartList: [],
 
                 selectedRow: null,
-
-                isEditMode: false
             }
         },
         methods: {
-            menuInsert: function () {
+            cartOrder: function () {
                 let vm = this;
                 vm.menu.product_date = new Date().toISOString().slice(0, 10);
                 axios({
@@ -139,6 +110,10 @@
                 })
             },
 
+            cartInsert: function () {
+                let vm = this;
+            },
+
             menuSelectList: function () {
                 let vm = this;
                 let searchParams = {
@@ -151,7 +126,7 @@
                     method: 'get',
                     params: searchParams,
                 }).then(function (response) {
-                    vm.menuList = response.data;
+                    vm.cartList = response.data;
                 });
             },
 
@@ -176,47 +151,10 @@
                 };
             },
 
-            resetForm: function () {
-                this.menu = this.emptyMenu;
-                this.isEditMode = false;
-            },
-
-            menuUpdate: function (item) {
-                let vm = this;
-                axios({
-                    url: '/menuUpdate.request',
-                    method: 'post',
-                    headers: {
-                        "Content-Type": "application/json; charset=UTF-8",
-                    },
-                    data: vm.menu,
-                }).then(function (response) {
-                    if (response.data > 0) {
-                        vm.menuSelectList();
-                        vm.resetForm();
-                    }
-                }).catch(function (error) {
-                    console.log('/menuUpdate.request 에러 발생', error);
-                    alert('메뉴 수정 에러가 발생하였습니다.');
-                });
-            },
-
             menuDelete: function (item) {
                 console.log(item);
                 let vm = this;
-                axios({
-                    url: '/menuDelete.request',
-                    method: 'post',
-                    data: { product_index: item },
-                }).then(function (response) {
-                    alert('메뉴 삭제가 완료되었습니다.');
-                    console.log(response);
-                    if (response.data > 0) {
-                        vm.menuSelectList();
-                    }
-                }).catch(function (error) {
-                    alert('메뉴 삭제 에러가 발생하였습니다.');
-                });
+                localStorage.removeItem();
             },
 
             handleButtonAction() {
@@ -247,6 +185,13 @@
                 }
             },
             
+        },
+        watch: {
+            "menu.product_category": function (newValue, oldValue) {
+                if(this.categoryIce.includes(this.menu.product_category)) {
+                    this.menu.product_temperature = "ice";
+                }
+            }
         },
         computed: {
             buttonLabel() {

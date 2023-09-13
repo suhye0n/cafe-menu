@@ -3,8 +3,14 @@
         <span style="margin-right: 10px">
             <router-link to="/">메인</router-link>
         </span>
-        <span>
+        <span style="margin-right: 10px">
             <router-link to="/cafe.page">메뉴관리</router-link>
+        </span>
+        <span style="margin-right: 10px">
+            <router-link to="/cart.page">상품 주문</router-link>
+        </span>
+        <span>
+            <router-link to="/list.page">주문 내역</router-link>
         </span>
     </div>
 </template>
