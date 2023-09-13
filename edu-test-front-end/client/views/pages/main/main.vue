@@ -52,7 +52,7 @@ export default {
     },
     mounted() {
         console.log('메인화면이 마운트 됨');
-        this.timer = setInterval(this.nextSlide, 5000);
+        this.timer = setInterval(this.nextSlide, 2000);
     },
     beforeDestroy() {
         clearInterval(this.timer);
