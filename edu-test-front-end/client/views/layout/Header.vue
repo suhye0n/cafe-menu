@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="header">
         <span style="margin-right: 10px">
             <router-link to="/">메인</router-link>
         </span>

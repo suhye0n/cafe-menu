@@ -16,8 +16,10 @@
                     <td style="border: 1px solid #000;">{{item.product_name}}</td>
                     <td style="border: 1px solid #000;">{{item.product_price}}</td>
                     <td style="border: 1px solid #000;">
+                        <!-- 수정: 핫 없으면 disabled -->
                         <button @click="cartInsert(item)">핫</button>
                         <button @click="cartInsert(item)">아이스</button>
+                        <!-- // 수정 -->
                     </td>
                 </tr>
             </tbody>
@@ -42,6 +44,8 @@
                     </tr>
                 </tbody>
             </table>
+            <p>합계: 8000원</p>
+            <!-- // 수정 -->
             <button>주문하기</button>
         </div>
     </div>

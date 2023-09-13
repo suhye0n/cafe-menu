@@ -10,7 +10,7 @@ module.exports = {
     resolve: {fallback: { "constants": false }},
 
     entry: {
-        app: [`${BASE_DIR}/client/views/pages/index.js`]
+        app: [`${BASE_DIR}/client/views/index.js`]
     },
 
     module: {

@@ -1,9 +1,9 @@
 import { createWebHistory, createRouter } from 'vue-router';
 
-import Main from './main/main.vue';
-import Cafe from './cafe/cafe.vue';
-import Cart from './cart/cart.vue';
-import List from './list/list.vue';
+import Main from './pages/main/main.vue';
+import Cafe from './pages/cafe/cafe.vue';
+import Cart from './pages/cart/cart.vue';
+import List from './pages/list/list.vue';
 
 const routes = [
     {path: '/', name: "Main", component: Main },

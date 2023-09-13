@@ -9,6 +9,8 @@ public interface OrderService {
 
     public List<HashMap<String, Object>> orderSelectList ();
 
+    public int orderUpdate (HashMap<String, Object> param);
+
     public int orderDelete (HashMap<String, Object> param);
 
 }

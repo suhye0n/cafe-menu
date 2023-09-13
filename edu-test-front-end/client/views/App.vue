@@ -7,8 +7,8 @@
 </template>
 
 <script>
-    import Header from '../layout/Header.vue';
-    import Main from './main/main.vue';
+    import Header from './layout/Header.vue';
+    import Main from './pages/main/main.vue';
 
     const App = {
         data: () => {

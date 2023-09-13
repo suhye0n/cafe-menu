@@ -10,6 +10,8 @@ public interface OrderDAO {
 
     public int orderInsert(HashMap<String, Object> param);
 
+    public int orderUpdate(HashMap<String, Object> param);
+
     public int orderDelete(HashMap<String, Object> param);
 
     public List<HashMap<String, Object>> orderSelectList();

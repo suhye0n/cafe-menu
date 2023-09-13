@@ -6,8 +6,10 @@
                 <option value="작성자">작성자</option>
                 <option value="작성일">작성일</option>
             </select>
+            <!-- 수정: 검색 기능 추가 -->
             <input type="text" v-model="searchKeyword" placeholder="입력해주세요.">
             <button @click="menuSearch()">검색</button>
+            <!-- // 수정 -->
         </div>
         <div>
             상품명:
@@ -32,6 +34,7 @@
             <!-- 수정: 라디오 대신 체크박스로 변경해서 여러개 선택할 수 있도록... -->
             <input type="radio" name="temp" value="아이스" v-model="menu.product_temperature">아이스
             <input type="radio" name="temp" value="핫" v-model="menu.product_temperature">핫
+            <!-- // 수정 -->
         </div>
         <div>
             상세 설명 : <textarea v-model="menu.product_explan" />

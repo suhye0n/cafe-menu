@@ -17,7 +17,7 @@ webServer.listen(8000, function () {
 
 webServer.get('/', function (request, response) {
     console.log("Root URL");
-    response.sendFile("C:/Users/claph/Documents/GitHub/cafe-menu/edu-test-front-end/client/views/pages/index.html")
+    response.sendFile("C:/Users/claph/Documents/GitHub/cafe-menu/edu-test-front-end/client/views/index.html")
 })
 
 webServer.use('*.request', expressProxy('http://localhost:8080', {
@@ -37,7 +37,7 @@ webServer.get('*.page', function (request, response) {
         done();
     }
 
-    FS.createReadStream(`${BASE_DIR}/client/views/pages/index.html`).pipe(newLineStream()).pipe(streamTransform).pipe(response);
+    FS.createReadStream(`${BASE_DIR}/client/views/index.html`).pipe(newLineStream()).pipe(streamTransform).pipe(response);
 })
 
 webServer.get('*.*', function (request, response) {

@@ -33,6 +33,14 @@ public class OrderController {
         return mav;
     }
 
+    @RequestMapping(value = "/orderUpdate.request", method = RequestMethod.POST)
+    public ModelAndView menuUpdate(@RequestBody HashMap<String, Object> param) {
+        System.out.println(param);
+        ModelAndView mav = new ModelAndView("jsonView");
+        mav.addObject("result", orderService.orderUpdate(param));
+        return mav;
+    }
+
     @RequestMapping(value = "/orderDelete.request", method = RequestMethod.POST)
     public ModelAndView orderDelete(@RequestBody HashMap<String, Object> param) {
         ModelAndView mav = new ModelAndView("jsonView");

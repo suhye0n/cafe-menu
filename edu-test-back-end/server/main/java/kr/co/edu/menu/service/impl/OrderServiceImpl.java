@@ -28,6 +28,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public int orderUpdate(HashMap<String, Object> param) {
+        int result = orderDAO.orderUpdate(param);
+        return result;
+    }
+
+    @Override
     public int orderDelete(HashMap<String, Object> param) {
         int result = orderDAO.orderDelete(param);
         return result;
