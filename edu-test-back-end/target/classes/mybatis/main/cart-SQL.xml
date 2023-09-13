@@ -48,6 +48,6 @@
         FROM
             product_order
         WHERE
-            product_index = #{order_index}
+            order_product_number = #{order_product_number}
     </delete>
 </mapper>
