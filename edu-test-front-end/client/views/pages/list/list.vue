@@ -29,6 +29,8 @@
                     </tbody>
                 </table>
 
+                합계: {{ calculateTotalPrice(groupedOrder) }}원
+
                 <button @click="orderUpdate(orderNumber)">수령 완료</button>
                 <button @click="orderDelete(orderNumber)">주문 취소</button>
             </fieldset>
@@ -95,6 +97,9 @@ const App = {
         }
     },
     methods: {
+        calculateTotalPrice(groupedOrder) {
+            return groupedOrder.reduce((sum, item) => sum + item.order_price, 0);
+        },
         orderInsert: function () {
             let vm = this;
             vm.order.product_date = new Date().toISOString().slice(0, 10);
