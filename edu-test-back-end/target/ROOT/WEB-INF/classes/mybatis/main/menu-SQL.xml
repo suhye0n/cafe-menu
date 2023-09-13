@@ -44,29 +44,6 @@
         </if>
     </select>
 
-<!--    <select id="menuSelectList" parameterType="java.util.HashMap" resultType="java.util.HashMap">-->
-<!--        SELECT-->
-<!--        product_name-->
-<!--        , product_category-->
-<!--        , product_price-->
-<!--        , product_writer-->
-<!--        , product_explan-->
-<!--        , product_date-->
-<!--        FROM-->
-<!--        product-->
-<!--        <where>-->
-<!--            <if test="product_name != null and product_name != ''">-->
-<!--                AND product_name like CONCAT('%', #{product_name}, '%')-->
-<!--            </if>-->
-<!--            <if test="product_writer != null and product_writer != ''">-->
-<!--                AND product_writer like CONCAT('%', #{product_writer}, '%')-->
-<!--            </if>-->
-<!--            <if test="product_date != null and product_date != ''">-->
-<!--                AND CAST(product_date AS DATE) = CAST(#{product_date} AS DATE)-->
-<!--            </if>-->
-<!--        </where>-->
-<!--    </select>-->
-
     <select id="menuSearch" parameterType="HashMap" resultType="HashMap">
         SELECT
             product_index,
@@ -75,6 +52,8 @@
             product_price,
             product_writer,
             product_explan,
+            product_hot,
+            product_ice,
             product_date
         FROM
             product

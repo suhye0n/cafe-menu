@@ -17,7 +17,10 @@
 
         <hr />
 
-        <div class="container">
+        <div>
+            <button @click="toggleContainer">컨테이너 {{ isContainerOpen ? '접기' : '펼치기' }}</button>
+        </div>
+        <div class="container" v-if="isContainerOpen">
             <div>
                 <input class="full" placeholder="상품명" type="text" v-model="menu.product_name">
             </div>
@@ -95,6 +98,7 @@ const App = {
         return {
             testNumber: 1,
             testString: '문자열',
+            isContainerOpen: true,
 
             emptyMenu: {
                 product_index: null,
@@ -132,6 +136,10 @@ const App = {
     },
 
     methods: {
+        toggleContainer() {
+            this.isContainerOpen = !this.isContainerOpen;
+        },
+
         menuInsert: function () {
             let vm = this;
             vm.menu.product_date = new Date().toISOString().slice(0, 10);
