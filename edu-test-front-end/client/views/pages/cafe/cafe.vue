@@ -1,15 +1,13 @@
 <template>
-    <div class="cafe">
+    <div class="container cafe">
         <div>
             <select v-model="searchType">
                 <option value="상품명">상품명</option>
                 <option value="작성자">작성자</option>
                 <option value="작성일">작성일</option>
             </select>
-            <!-- 수정: 검색 기능 추가 -->
             <input type="text" v-model="searchKeyword" placeholder="입력해주세요.">
             <button @click="menuSearch()">검색</button>
-            <!-- // 수정 -->
         </div>
         <div>
             상품명:
@@ -31,10 +29,8 @@
             작성자 : <input type="text" v-model="menu.product_writer">
         </div>
         <div>
-            <!-- 수정: 라디오 대신 체크박스로 변경해서 여러개 선택할 수 있도록... -->
-            <input type="radio" name="temp" value="아이스" v-model="menu.product_temperature">아이스
-            <input type="radio" name="temp" value="핫" v-model="menu.product_temperature">핫
-            <!-- // 수정 -->
+            <input type="checkbox" value="아이스" v-model="menu.product_ice">아이스
+            <input type="checkbox" value="핫" v-model="menu.product_hot">핫
         </div>
         <div>
             상세 설명 : <textarea v-model="menu.product_explan" />
@@ -54,7 +50,8 @@
                     <th style="border: 1px solid #000;">작성일</th>
                     <th style="border: 1px solid #000;">카테고리</th>
                     <th style="border: 1px solid #000;">설명</th>
-                    <th style="border: 1px solid #000;">핫/아이스</th>
+                    <th style="border: 1px solid #000;">핫</th>
+                    <th style="border: 1px solid #000;">아이스</th>
                     <th style="border: 1px solid #000;">수정</th>
                     <th style="border: 1px solid #000;">삭제</th>
                 </tr>
@@ -68,7 +65,8 @@
                     <td style="border: 1px solid #000;">{{item.product_date}}</td>
                     <td style="border: 1px solid #000;">{{item.product_category}}</td>
                     <td style="border: 1px solid #000;">{{item.product_explan}}</td>
-                    <td style="border: 1px solid #000;">{{item.product_temperature}}</td>
+                    <td style="border: 1px solid #000;">{{item.product_hot}}</td>
+                    <td style="border: 1px solid #000;">{{item.product_ice}}</td>
                     <td style="border: 1px solid #000;"><button @click="menuSelectOne(item)">수정</button></td>
                     <td style="border: 1px solid #000;"><button @click="menuDelete(item.product_index)">삭제</button></td>
                 </tr>
@@ -93,7 +91,8 @@
                     product_price: null,
                     product_writer: null,
                     product_explan: null,
-                    product_temperature: 'ice',
+                    product_ice: false,
+                    product_hot: false,
                     product_date: null
                 },
 
@@ -102,7 +101,8 @@
                     product_price: 0,
                     product_category: null,
                     product_explan: null,
-                    product_temperature: null,
+                    product_ice: false,
+                    product_hot: false,
                     product_writer: null,
                     product_date: null,
                     searchType: "상품명",
@@ -116,7 +116,7 @@
                 isEditMode: false
             }
         },
-        
+
         methods: {
             menuInsert: function () {
                 let vm = this;
@@ -175,7 +175,8 @@
                     product_price: item.product_price,
                     product_writer: item.product_writer,
                     product_explan: item.product_explan,
-                    product_temperature: item.product_temperature,
+                    product_hot: item.product_hot,
+                    product_ice: item.product_ice,
                     product_date: item.product_date
                 };
             },

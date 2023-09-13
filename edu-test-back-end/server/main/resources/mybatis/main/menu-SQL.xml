@@ -10,7 +10,8 @@
             , product_price
             , product_writer
             , product_explan
-            , product_temperature
+            , product_hot
+            , product_ice
             , product_date
         ) VALUES (
             #{product_name}
@@ -18,7 +19,8 @@
             , #{product_price}
             , #{product_writer}
             , #{product_explan}
-            , #{product_temperature}
+            , #{product_hot}
+            , #{product_ice}
             , CAST(#{product_date} AS DATE)
         )
     </insert>
@@ -31,7 +33,8 @@
         , product_price
         , product_writer
         , product_explan
-        , product_temperature
+        , product_hot
+        , product_ice
         , product_date
         FROM
         product
@@ -73,7 +76,8 @@
           , product_price = #{product_price}
           , product_writer = #{product_writer}
           , product_explan = #{product_explan}
-          , product_temperature = #{product_temperature}
+          , product_hot = #{product_hot}
+          , product_ice = #{product_ice}
           , product_date = CAST(#{product_date} AS DATE)
         WHERE
             product_index = #{product_index}

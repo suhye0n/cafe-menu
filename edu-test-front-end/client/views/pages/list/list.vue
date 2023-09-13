@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="list">
         <h3>주문 상세</h3>
 
         <fieldset v-for="(item, idx) in menuList">
@@ -34,28 +34,30 @@
             <!-- // 수정 -->
         </fieldset>
 
-        <table style="border: 1px solid #000; text-align: center;">
-            <thead>
-                <tr>
-                    <th style="border: 1px solid #000;">NO</th>
-                    <th style="border: 1px solid #000;">주문번호</th>
-                    <th style="border: 1px solid #000;">상품명</th>
-                    <th style="border: 1px solid #000;">주문금액</th>
-                    <th style="border: 1px solid #000;">주문일</th>
-                    <th style="border: 1px solid #000;">주문 상태</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="(item, idx) in menuList">
-                    <td style="border: 1px solid #000;">{{ idx }}</td>
-                    <td style="border: 1px solid #000;">{{ item.order_product_number }}</td>
-                    <td style="border: 1px solid #000;">{{ item.order_product_name }}</td>
-                    <td style="border: 1px solid #000;">{{ item.order_price }}</td>
-                    <td style="border: 1px solid #000;">{{ item.order_date }}</td>
-                    <td style="border: 1px solid #000;">{{ item.order_state }}</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="container">
+            <table style="border: 1px solid #000; text-align: center;">
+                <thead>
+                    <tr>
+                        <th style="border: 1px solid #000;">NO</th>
+                        <th style="border: 1px solid #000;">주문번호</th>
+                        <th style="border: 1px solid #000;">상품명</th>
+                        <th style="border: 1px solid #000;">주문금액</th>
+                        <th style="border: 1px solid #000;">주문일</th>
+                        <th style="border: 1px solid #000;">주문 상태</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(item, idx) in menuList">
+                        <td style="border: 1px solid #000;">{{ idx }}</td>
+                        <td style="border: 1px solid #000;">{{ item.order_product_number }}</td>
+                        <td style="border: 1px solid #000;">{{ item.order_product_name }}</td>
+                        <td style="border: 1px solid #000;">{{ item.order_price }}</td>
+                        <td style="border: 1px solid #000;">{{ item.order_date }}</td>
+                        <td style="border: 1px solid #000;">{{ item.order_state }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </template>
 

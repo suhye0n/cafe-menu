@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="cart">
         <h1>상품 주문</h1>
         <table style="border: 1px solid #000; text-align: center;">
             <thead>
@@ -16,14 +16,14 @@
                     <td style="border: 1px solid #000;">{{ item.product_name }}</td>
                     <td style="border: 1px solid #000;">{{ item.product_price }}</td>
                     <td style="border: 1px solid #000;">
-                        <button @click="cartInsert(item, '핫')">핫</button>
-                        <button @click="cartInsert(item, '아이스')">아이스</button>
+                        <button @click="cartInsert(item, '핫')" :disabled="!item.product_hot">핫</button>
+                        <button @click="cartInsert(item, '아이스')" :disabled="!item.product_ice">아이스</button>
                     </td>
                 </tr>
             </tbody>
         </table>
 
-        <div>
+        <div class="container">
             <h3>장바구니</h3>
             <button @click="removeSelectedItems()">삭제</button>
 
@@ -80,7 +80,8 @@ const App = {
                 product_price: 0,
                 product_category: null,
                 product_explan: null,
-                product_temperature: null,
+                product_ice: false,
+                product_hot: false,
                 product_writer: null,
                 product_date: null,
                 product_amount: 1,
@@ -140,7 +141,9 @@ const App = {
                 let newCartItem = {
                     ...item,
                     product_temperature: temperature,
-                    order_amount: 1
+                    order_amount: 1,
+                    product_hot: !!item.product_hot,
+                    product_ice: !!item.product_ice
                 };
                 this.cartList.push(newCartItem);
             }
