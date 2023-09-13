@@ -129,19 +129,24 @@ const App = {
         },
 
         cartInsert: function (item, temperature) {
-            let newCartItem = {
-                ...item,
-                product_temperature: temperature,
-                order_amount: 1
-            };
+            const existingItem = this.cartList.find(cartItem => 
+                cartItem.product_name === item.product_name &&
+                cartItem.product_temperature === temperature
+            );
 
-            const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
-            console.log(storedCart);
-            storedCart.push(newCartItem);
-            localStorage.setItem("cart", JSON.stringify(storedCart));
-            this.menuSelectList();
+            if (existingItem) {
+                existingItem.order_amount++;
+            } else {
+                let newCartItem = {
+                    ...item,
+                    product_temperature: temperature,
+                    order_amount: 1
+                };
+                this.cartList.push(newCartItem);
+            }
+
+            localStorage.setItem("cart", JSON.stringify(this.cartList));
         },
-
 
         menuInsert: function () {
             let vm = this;
@@ -254,6 +259,7 @@ const App = {
             });
 
             localStorage.setItem("cart", JSON.stringify(storedCart));
+            this.allSelected = false;
             this.menuSelectList();
         }
     },
