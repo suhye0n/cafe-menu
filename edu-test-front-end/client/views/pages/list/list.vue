@@ -53,7 +53,7 @@
                         <td>{{ groupedOrder[0].order_product_number }}</td>
                         <td>
                             <span>{{ groupedOrder[0].order_product_name }}</span>
-                            <span style="color: #ff9d9d;" v-if="groupedOrder.length > 1"> 외 {{ groupedOrder.length - 1 }}개</span>
+                            <span style="color: #B27C47;" v-if="groupedOrder.length > 1"> 외 {{ groupedOrder.length - 1 }}개</span>
                         </td>
                         <td>
                             {{ groupedOrder.reduce((sum, item) => sum + item.order_price, 0) }}

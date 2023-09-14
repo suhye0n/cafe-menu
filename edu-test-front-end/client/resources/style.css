@@ -14,9 +14,9 @@
 }
 
 @font-face {
-    font-family: 'KOTRAHOPE';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/KOTRAHOPE.woff2') format('woff2');
-    font-weight: normal;
+    font-family: 'Giants-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Giants-Bold.woff2') format('woff2');
+    font-weight: 700;
     font-style: normal;
 }
 
@@ -40,7 +40,7 @@
 
 ::-webkit-scrollbar-thumb {
     border-radius: 8px;
-    background-color: #90a1f8;
+    background-color: #B27C47;
 }
 
 /* 공통 */
@@ -53,8 +53,8 @@
 }
 
 body {
-    margin-top: 65px;
-    background-color: rgba(162, 194, 249, .06);
+    margin-top: 68px;
+    background-color: #DEDCDA;
 }
 
 a {
@@ -66,7 +66,7 @@ a {
 tr td button {
     padding: 5px 10px;
     cursor: pointer;
-    background-color: #9dc3ff;
+    background-color: #B27C47;
     color: white;
     border: none;
     border-radius: 3px;
@@ -87,7 +87,7 @@ button {
 
 button {
     padding: 10px 13px;
-    background-color: #9dc3ff;
+    background-color: #B27C47;
     color: white;
     cursor: pointer;
     transition: .2s ease-in-out;
@@ -114,7 +114,7 @@ span {
 
 [type="radio"] {
     appearance: none;
-    border: max(2px, 0.1em) solid #858ff1;
+    border: max(2px, 0.1em) solid #B27C47;
     border-radius: 50%;
     width: 1.25em;
     height: 1.25em;
@@ -123,12 +123,12 @@ span {
 }
 
 [type="radio"]:checked {
-    border: 0.4em solid #9dc3ff;
+    border: 0.4em solid #B27C47;
 }
 
 [type="radio"]:focus-visible {
     outline-offset: max(2px, 0.1em);
-    outline: max(2px, 0.1em) dotted #9dc3ff;
+    outline: max(2px, 0.1em) dotted #B27C47;
 }
 
 [type="radio"]:hover {
@@ -161,7 +161,7 @@ textarea {
     margin: 40px 0;
     border-radius: 10px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    background-color: rgba(162, 194, 249, .08);
+    background-color: #F6DCAA;
 }
 
 h2 {
@@ -174,11 +174,10 @@ h4 {
 
 /* 빠른 스타일 적용 */
 .confirm {
-    background-color: #90a1f8;
 }
 
 .danger {
-    background-color: #ff9d9d;
+    background-color: #5C3916;
 }
 
 .margin {
@@ -205,7 +204,7 @@ table {
 th,
 td {
     padding: 10px;
-    border: 1px solid #858ff1;
+    border: 1px solid #5C3916;
     text-align: center;
 }
 
@@ -215,7 +214,7 @@ td {
 }
 
 th {
-    background-color: #8eb0f2;
+    background-color: #5C3916;
     color: #f2f2f2;
 }
 
@@ -227,18 +226,18 @@ th {
 }
 
 .container th {
-    background-color: rgba(162, 194, 249, .1);
+    background-color: rgba(123, 90, 52, .1);
     border-bottom: .5px dashed rgba(162, 194, 249, .3);
     color: #858585;
     font-size: 14px;
 }
 
 tr:nth-child(even) {
-    background-color: rgba(162, 194, 249, .1);
+    background-color: rgba(123, 90, 52, .1);
 }
 
 .container tr:nth-child(even) {
-    border: .5px dashed rgba(162, 194, 249, .3);
+    border: .5px dashed rgba(123, 90, 53, .3);
 }
 
 /* 헤더 */
@@ -254,7 +253,11 @@ tr:nth-child(even) {
 }
 
 .header span {
-    margin-right: 15px
+    margin-right: 15px;
+}
+
+.header span * {
+    color: #B27C47;
 }
 
 .title {
@@ -262,10 +265,10 @@ tr:nth-child(even) {
 }
 
 .title * {
-    color: #858ff1;
+    color: #5C3916 !important;
     letter-spacing: 1px;
-    font-family: 'KOTRAHOPE';
-    font-weight: 400;
+    font-family: 'Giants-Bold';
+    font-weight: 600;
     font-size: 20px;
 }
 
@@ -361,5 +364,5 @@ img {
 }
 
 .footer a {
-    color: #90a1f8;
+    color: #B27C47;
 }
