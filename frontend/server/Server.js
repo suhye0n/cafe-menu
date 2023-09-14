@@ -14,7 +14,7 @@ webServer.listen(8000, function () {
 
 webServer.get('/', function (request, response) {
     console.log("Root URL");
-    response.sendFile("C:/Users/claph/Documents/GitHub/cafe-menu/edu-test-front-end/client/views/index.html")
+    response.sendFile("C:/Users/claph/Documents/GitHub/cafe-menu/frontend/client/views/index.html")
 })
 
 webServer.use('*.request', expressProxy('http://localhost:8080', {
