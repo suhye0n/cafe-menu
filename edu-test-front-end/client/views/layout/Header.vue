@@ -2,7 +2,7 @@
     <div class="header">
         <span class="title">
             <router-link to="/">
-                <i class="xi-cafe" style="font-size: 16px;" />
+                <i class="xi-cafe" />
                 카페 메뉴관리
             </router-link>
         </span>

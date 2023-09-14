@@ -1,6 +1,8 @@
 <template>
     <div class="cart content">
-        <h1>상품 주문</h1>
+        <h1>
+            <i class="xi-cart-o" /> 상품 주문
+        </h1>
         <table>
             <thead>
                 <tr>

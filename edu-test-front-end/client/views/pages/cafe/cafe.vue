@@ -1,8 +1,10 @@
 <template>
     <div class="cafe content">
-        <h1>메뉴 관리</h1>
+        <h1>
+            <i class="xi-bars" /> 메뉴 관리
+        </h1>
 
-        <div class="search-section">
+        <div class="search-section" style="margin: 10px 0;">
             <select v-model="selectedSearchOption">
                 <option value="product_name">상품명</option>
                 <option value="product_writer">작성자</option>
@@ -17,12 +19,10 @@
             <button @click="dataSearch()" class="confirm"><i class="xi-search" /></button>
         </div>
 
-        <hr />
-
         <div>
             <button @click="toggleContainer">컨테이너 {{ isContainerOpen ? '접기' : '펼치기' }}</button>
         </div>
-        <div class="container" v-if="isContainerOpen">
+        <div class="container" v-if="isContainerOpen" style="margin: 5px 0;">
             <div>
                 <input class="full" placeholder="상품명" type="text" v-model="menu.product_name">
             </div>

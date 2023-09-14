@@ -58,7 +58,7 @@ body {
 }
 
 a {
-    transition: .4s ease-in-out;
+    transition: .2s ease-in-out;
     color: #333;
     text-decoration: none;
 }
@@ -86,11 +86,11 @@ button {
 }
 
 button {
-    padding: 8px;
+    padding: 10px 13px;
     background-color: #9dc3ff;
     color: white;
     cursor: pointer;
-    transition: .4s ease-in-out;
+    transition: .2s ease-in-out;
 }
 
 button:hover,
@@ -101,10 +101,6 @@ a:hover {
 button:disabled {
     background-color: #eee;
     cursor: not-allowed;
-}
-
-input[type="date"] {
-    padding: 9px;
 }
 
 input[type="text"] {
@@ -352,6 +348,12 @@ img {
 /* 푸터 */
 .footer {
     text-align: center;
-    font-size: 12px;
-    padding: 40px;
+    font-size: 13px;
+    font-weight: 100;
+    padding: 40px 0 80px;
+    color: #838383;
+}
+
+.footer a {
+    color: #90a1f8;
 }
