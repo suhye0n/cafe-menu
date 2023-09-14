@@ -83,7 +83,7 @@
                         <td>{{ item.product_explan }}</td>
                         <td>{{ item.product_hot }}</td>
                         <td>{{ item.product_ice }}</td>
-                        <td><button @click="menuSelectOne(item)" class="confirm">수정</button></td>
+                        <td><button @click="menuSelectOne(item); this.isContainerOpen = true;" class="confirm">수정</button></td>
                         <td><button @click="menuDelete(item.product_index)">삭제</button></td>
                     </tr>
                 </tbody>
