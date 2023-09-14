@@ -8,7 +8,7 @@
                 <tr>
                     <th>NO</th>
                     <th>상품명</th>
-                    <th>메뉴가격(단위:원)</th>
+                    <th>가격 (단위: \)</th>
                     <th>담기</th>
                 </tr>
             </thead>
@@ -18,7 +18,7 @@
                     <td>{{ item.product_name }}</td>
                     <td>{{ item.product_price }}</td>
                     <td>
-                        <button @click="cartInsert(item, '핫')" :disabled="!item.product_hot" class="danger"><i class="xi-firefox" />핫</button>
+                        <button @click="cartInsert(item, '핫')" :disabled="!item.product_hot" class="danger"><i class="xi-firefox" /> 핫</button>
                         <button @click="cartInsert(item, '아이스')" :disabled="!item.product_ice"><i class="xi-snow-crystal" /> 아이스</button>
                     </td>
                 </tr>
