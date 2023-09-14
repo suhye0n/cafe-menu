@@ -54,7 +54,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <p>합계: {{ totalAmount }}원</p>
+                <h4>합계: {{ totalAmount }}원</h4>
                 <button class="confirm" @click="cartOrder()">주문하기</button>
             </div>
             <div v-else>
