@@ -187,57 +187,52 @@ const App = {
         },
 
         cartOrder: async function () {
-  try {
-    const vm = this;
-    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
-    
-    if (storedCart.length === 0) {
-      alert("장바구니가 비어 있습니다.");
-      return;
-    }
-    
-    // Step 1: 마지막 주문 번호를 가져오기
-    const lastOrderNumberResponse = await axios.get('/getLastOrderNumber.request');
-    const lastOrderNumber = lastOrderNumberResponse.data;
-    const newOrderNumber = lastOrderNumber + 1;
-    
-    // Step 2: 주문 생성
-    const createOrderPromises = storedCart.map(item => {
-      const orderData = {
-        order_product_number: newOrderNumber,
-        order_product_name: item.product_name,
-        order_product_category: item.product_category,
-        order_product_temperature: item.product_temperature,
-        order_amount: item.order_amount,
-        order_price: item.product_price * item.order_amount,
-        order_date: new Date().toISOString().slice(0, 10),
-        order_state: "진행중"
-      };
-      
-      return axios.post('/orderInsert.request', orderData);
-    });
-    
-    // 모든 주문 요청을 기다립니다.
-    const createOrderResponses = await Promise.all(createOrderPromises);
-    
-    // 모든 주문이 성공적으로 생성되었는지 확인
-    const isSuccess = createOrderResponses.every(response => response.status === 200);
-    
-    if (isSuccess) {
-      alert("주문이 완료되었습니다.");
-      
-      // 성공적으로 주문이 생성되면 다음 작업을 수행합니다.
-      vm.orderProductNumber++;
-      localStorage.removeItem("cart");
-      vm.menuSelectList();
-    } else {
-      alert("주문 생성에 실패했습니다.");
-    }
-  } catch (error) {
-    console.error('/orderInsert.request 에러 발생', error);
-    alert('주문 생성 중 오류가 발생했습니다. 관리자에게 문의바랍니다.');
-  }
-},
+            try {
+                const vm = this;
+                const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+
+                if (storedCart.length === 0) {
+                    alert("장바구니가 비어 있습니다.");
+                    return;
+                }
+
+                const lastOrderNumberResponse = await axios.get('/getLastOrderNumber.request');
+                const lastOrderNumber = lastOrderNumberResponse.data;
+                const newOrderNumber = lastOrderNumber + 1;
+
+                const createOrderPromises = storedCart.map(item => {
+                    const orderData = {
+                        order_product_number: newOrderNumber,
+                        order_product_name: item.product_name,
+                        order_product_category: item.product_category,
+                        order_product_temperature: item.product_temperature,
+                        order_amount: item.order_amount,
+                        order_price: item.product_price * item.order_amount,
+                        order_date: new Date().toISOString().slice(0, 10),
+                        order_state: "진행중"
+                    };
+
+                    return axios.post('/orderInsert.request', orderData);
+                });
+
+                const createOrderResponses = await Promise.all(createOrderPromises);
+
+                const isSuccess = createOrderResponses.every(response => response.status === 200);
+
+                if (isSuccess) {
+                    alert("주문이 완료되었습니다.");
+
+                    vm.orderProductNumber++;
+                    localStorage.removeItem("cart");
+                    vm.menuSelectList();
+                } else {
+                    alert("주문 생성에 실패했습니다.");
+                }
+            } catch (error) {
+                console.error('/orderInsert.request 에러 발생', error);
+                alert('주문 생성 중 오류가 발생했습니다. 관리자에게 문의바랍니다.');
+            }
+        },
 
         updateAmount(item, action) {
             const storedCart = JSON.parse(localStorage.getItem("cart")) || [];

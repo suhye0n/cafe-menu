@@ -1,6 +1,6 @@
 <template>
     <div class="header">
-        <span style="margin-right: 50px">
+        <span class="title">
             <router-link to="/">카페 메뉴관리</router-link>
         </span>
         <span style="margin-right: 10px">

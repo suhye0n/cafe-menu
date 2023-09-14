@@ -1,6 +1,6 @@
 <template>
     <div class="footer">
-        copyright <a href="https://github.com/suhye0n" target="_blank">suhye0n</a> all right deserved.
+        copyrightⓒ 2023 <a href="https://github.com/suhye0n" target="_blank">suhye0n</a> all rights deserved.
     </div>
 </template>
 

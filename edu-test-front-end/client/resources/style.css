@@ -23,12 +23,6 @@ a {
     text-decoration: none;
 }
 
-input {
-    padding: 2px;
-    border-radius: 5px;
-    border: 1px solid #333;
-}
-
 table {
     width: 100%;
     border-collapse: collapse;
@@ -66,6 +60,7 @@ tr td button {
 select,
 input[type="text"],
 input[type="number"],
+input[type="date"],
 textarea,
 button {
     padding: 10px;
@@ -84,6 +79,10 @@ button {
 button:disabled {
     background-color: #eee;
     cursor: not-allowed;
+}
+
+input[type="date"] {
+    padding: 9px;
 }
 
 input[type="text"] {
@@ -119,6 +118,15 @@ textarea {
     width: 100%;
     padding: 20px 40px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header span {
+    margin-right: 15px
+}
+
+.title {
+    font-weight: 900;
+    margin-right: 80px !important;
 }
 
 /* 메인 */
@@ -211,4 +219,5 @@ img {
 .footer {
     text-align: center;
     font-size: 12px;
+    padding: 40px;
 }
