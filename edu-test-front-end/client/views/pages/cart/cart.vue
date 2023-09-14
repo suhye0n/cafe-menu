@@ -1,7 +1,7 @@
 <template>
     <div class="cart content">
         <h1>
-            <i class="xi-cart-o" /> 상품 주문
+            <i class="xi-glass" /> 상품 주문
         </h1>
         <table>
             <thead>
@@ -26,7 +26,9 @@
         </table>
 
         <div class="container">
-            <h3>장바구니</h3>
+        <h1>
+            <i class="xi-cart-o" /> 장바구니
+        </h1>
 
             <div v-if="cartList && cartList.length > 0">
             <button @click="removeSelectedItems()" class="danger">삭제</button>

@@ -12,8 +12,8 @@
             </li>
         </ul>
         <p class="controller">
-            <span @click="prevSlide">&lang;</span>
-            <span @click="nextSlide">&rang;</span>
+            <span @click="prevSlide"><i class="xi-arrow-left" /></span>
+            <span @click="nextSlide"><i class="xi-arrow-right" /></span>
         </p>
         <p class="pagination">
             <span v-for="(slide, index) in slides" :key="index" :class="{ active: index === currentIndex }"
