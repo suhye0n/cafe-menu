@@ -1,21 +1,21 @@
 <template>
     <div class="cart">
         <h1>상품 주문</h1>
-        <table style="border: 1px solid #000; text-align: center;">
+        <table>
             <thead>
                 <tr>
-                    <th style="border: 1px solid #000;">NO</th>
-                    <th style="border: 1px solid #000;">상품명</th>
-                    <th style="border: 1px solid #000;">메뉴가격(단위:원)</th>
-                    <th style="border: 1px solid #000;">담기</th>
+                    <th>NO</th>
+                    <th>상품명</th>
+                    <th>메뉴가격(단위:원)</th>
+                    <th>담기</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="(item, idx) in menuList">
-                    <td style="border: 1px solid #000;">{{ idx }}</td>
-                    <td style="border: 1px solid #000;">{{ item.product_name }}</td>
-                    <td style="border: 1px solid #000;">{{ item.product_price }}</td>
-                    <td style="border: 1px solid #000;">
+                    <td>{{ idx }}</td>
+                    <td>{{ item.product_name }}</td>
+                    <td>{{ item.product_price }}</td>
+                    <td>
                         <button @click="cartInsert(item, '핫')" :disabled="!item.product_hot">핫</button>
                         <button @click="cartInsert(item, '아이스')" :disabled="!item.product_ice">아이스</button>
                     </td>
@@ -71,9 +71,10 @@ import axios from 'axios';
 const App = {
     data: () => {
         return {
-            testNumber: 1,
-            testString: '문자열',
             orderProductNumber: 1,
+            menuList: [],
+            cartList: [],
+            allSelected: false,
 
             menu: {
                 product_name: null,
@@ -97,14 +98,6 @@ const App = {
                 order_date: null,
                 order_state: "진행중",
             },
-
-            menuList: [],
-
-            cartList: [],
-
-            selectedRow: null,
-
-            allSelected: false,
         }
     },
 
@@ -269,7 +262,6 @@ const App = {
     },
 
     mounted() {
-        console.log('메뉴관리화면이 마운트 됨');
         this.menuSelectList();
     },
 }

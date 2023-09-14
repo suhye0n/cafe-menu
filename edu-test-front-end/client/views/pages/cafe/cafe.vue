@@ -54,7 +54,7 @@
         </div>
 
         <div>
-            <table style="border: 1px solid #000; text-align: center;">
+            <table>
                 <thead>
                     <tr>
                         <th>NO</th>
@@ -189,14 +189,14 @@ const App = {
                 },
                 data: searchPayload,
             })
-            .then(function (response) {
-                console.log("dataSearch - response : ", response.data);
-                vm.menuList = response.data;
-            })
-            .catch(function (error) {
-                console.log("dataSearch - error : ", error);
-                alert("상품 검색에 오류가 발생했습니다.");
-            });
+                .then(function (response) {
+                    console.log("dataSearch - response : ", response.data);
+                    vm.menuList = response.data;
+                })
+                .catch(function (error) {
+                    console.log("dataSearch - error : ", error);
+                    alert("상품 검색에 오류가 발생했습니다. 관리자에게 문의바랍니다.");
+                });
         },
 
         menuSelectOne: function (item) {
@@ -290,9 +290,8 @@ const App = {
 
     },
     watch: {
-        // selectedSearchOption 데이터 변경 시 실행
         "selectedSearchOption": function (newValue, oldValue) {
-            this.searchKeyword = ""; // 검색어 초기화
+            this.searchKeyword = "";
         }
     },
     computed: {

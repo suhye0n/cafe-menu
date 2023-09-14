@@ -56,5 +56,4 @@ public class OrderController {
         mav.addObject("lastOrderNumber", lastOrderNumber);
         return mav;
     }
-
 }
