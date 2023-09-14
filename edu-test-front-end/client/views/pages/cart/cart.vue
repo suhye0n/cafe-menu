@@ -31,7 +31,7 @@
         </h1>
 
             <div v-if="cartList && cartList.length > 0">
-            <button @click="removeSelectedItems()" class="danger">삭제</button>
+            <button @click="removeSelectedItems()" class="danger" style="float: right">삭제</button>
                 <table>
                     <thead>
                         <tr>
@@ -59,7 +59,7 @@
                     </tbody>
                 </table>
                 <h4>합계: {{ totalAmount }}원</h4>
-                <button class="confirm" @click="cartOrder()">주문하기</button>
+                <button class="confirm full" @click="cartOrder()">주문하기</button>
             </div>
             <div v-else>
                 <p>장바구니가 비어있습니다.</p>

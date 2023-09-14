@@ -20,7 +20,7 @@
         </div>
 
         <div>
-            <button @click="toggleContainer">컨테이너 {{ isContainerOpen ? '접기' : '펼치기' }}</button>
+            <button class="full" @click="toggleContainer">{{ isContainerOpen ? '∧ 접기' : '∨ 펼치기' }}</button>
         </div>
         <div class="container" v-if="isContainerOpen" style="margin: 5px 0;">
             <div>
@@ -48,8 +48,8 @@
                 <textarea class="full" placeholder="상세 설명" v-model="menu.product_explan" />
             </div>
             <div class="margin">
-                <button @click="handleButtonAction()" class="confirm"><i class="xi-library-add" />{{ buttonLabel }}</button>
-                <button v-if="isEditMode" class="button danger" id="addBtn" @click="resetForm()"><i class="xi-calendar-cancle" />취소</button>
+                <button @click="handleButtonAction()" class="confirm"><i class="xi-library-add" /> {{ buttonLabel }}</button>
+                <button v-if="isEditMode" class="button danger" id="addBtn" @click="resetForm()"><i class="xi-calendar-cancle" /> 취소</button>
             </div>
         </div>
 
