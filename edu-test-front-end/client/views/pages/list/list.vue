@@ -31,7 +31,7 @@
 
                 <h4>합계: {{ calculateTotalPrice(groupedOrder) }}원</h4>
 
-                <button @click="orderUpdate(orderNumber)">수령 완료</button>
+                <button @click="orderUpdate(orderNumber)" class="confirm">수령 완료</button>
                 <button @click="orderDelete(orderNumber)">주문 취소</button>
             </div>
         </div>

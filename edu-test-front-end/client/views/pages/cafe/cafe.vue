@@ -35,12 +35,10 @@
                 <input type="radio" name="category" value="콜라" v-model="menu.product_category">콜라
             </div>
             <div class="margin">
-                <h5>가격</h5>
-                <input type="number" v-model="menu.product_price">
+                <input placeholder="가격" type="number" v-model="menu.product_price">
             </div>
             <div>
-                <h5>작성자</h5>
-                <input type="text" v-model="menu.product_writer">
+                <input placeholder="작성자" type="text" v-model="menu.product_writer">
             </div>
             <div class="margin">
                 <input type="checkbox" value="아이스" v-model="menu.product_ice"> 아이스
@@ -106,7 +104,7 @@ const App = {
                 product_index: null,
                 product_name: null,
                 product_category: null,
-                product_price: null,
+                product_price: 0,
                 product_writer: null,
                 product_explan: null,
                 product_ice: false,
@@ -155,9 +153,9 @@ const App = {
             }).then(function (response) {
                 console.log('/menuInsert.request의 response 결과 값 : ' + response);
                 if (response.data > 0) {
+                    vm.menu = vm.emptyMenu;
                     alert("상품이 등록되었습니다.");
                     vm.menuSelectList();
-                    vm.menu = vm.emptyMenu;
                 } else {
                     alert('등록된 메뉴가 없습니다.');
                 }
