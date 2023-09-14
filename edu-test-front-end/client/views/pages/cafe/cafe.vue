@@ -51,7 +51,7 @@
             </div>
             <div class="margin">
                 <button @click="handleButtonAction()" class="confirm">{{ buttonLabel }}</button>
-                <button class="button" id="addBtn" @click="resetForm()">취소</button>
+                <button v-if="isEditMode" class="button" id="addBtn" @click="resetForm()">취소</button>
             </div>
         </div>
 
