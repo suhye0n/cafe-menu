@@ -40,9 +40,8 @@
         <table>
             <thead>
                 <tr>
-                    <th>NO</th>
                     <th>주문번호</th>
-                    <th>상품명</th>
+                    <th>주문상품</th>
                     <th>주문금액</th>
                     <th>주문일</th>
                     <th>주문상태</th>
@@ -51,12 +50,11 @@
             <tbody>
                 <template v-for="(groupedOrder, orderNumber) in groupedOrders">
                     <tr>
-                        <td>{{ orderNumber }}</td>
+                        <td>{{ groupedOrder[0].order_product_number }}</td>
                         <td>
                             {{ groupedOrder[0].order_product_name }}
                             <span v-if="groupedOrder.length > 1"> 외 {{ groupedOrder.length - 1 }}개</span>
                         </td>
-                        <td>{{ groupedOrder[0].order_product_category }}</td>
                         <td>
                             {{ groupedOrder.reduce((sum, item) => sum + item.order_price, 0) }}
                         </td>
