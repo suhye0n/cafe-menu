@@ -232,6 +232,7 @@ const App = {
                 },
                 data: vm.menu,
             }).then(function (response) {
+                alert('메뉴 수정이 완료되었습니다.');
                 if (response.data > 0) {
                     vm.menuSelectList();
                     vm.resetForm();
