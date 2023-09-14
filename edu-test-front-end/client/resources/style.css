@@ -1,4 +1,20 @@
-/* 폰트 */
+/****************************************/
+/* 1. 폰트
+/* 2. 스크롤바
+/* 3. 공통
+/* 4. 빠른 스타일 적용
+/* 5. 테이블
+/* 6. 헤더
+/* 7. 메인
+/* 8. 페이지 공통
+/* 9. 메뉴 관리
+/* 10. 상품 주문
+/* 11. 주문 내역
+/* 12. 푸터
+/****************************************/
+
+
+/* 1. 폰트 */
 @font-face {
     font-family: 'S-CoreDream-3Light';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
@@ -20,7 +36,7 @@
     font-style: normal;
 }
 
-/* 스크롤바 */
+/* 2. 스크롤바 */
 ::-webkit-scrollbar {
     width: 10px;
     height: 20px;
@@ -43,7 +59,7 @@
     background-color: #B27C47;
 }
 
-/* 공통 */
+/* 3. 공통 */
 * {
     font-family: 'S-CoreDream-3Light';
     margin: 0;
@@ -172,7 +188,7 @@ h4 {
     margin: 20px 0;
 }
 
-/* 빠른 스타일 적용 */
+/* 4. 빠른 스타일 적용 */
 .confirm {
 }
 
@@ -193,7 +209,7 @@ h4 {
 }
 
 
-/* 테이블 */
+/* 5. 테이블 */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -243,7 +259,7 @@ tr:nth-child(even) {
     border: .5px dashed rgba(123, 90, 53, .3);
 }
 
-/* 헤더 */
+/* 6. 헤더 */
 .header {
     background-color: rgba(255, 255, 255, .6);
     position: fixed;
@@ -253,6 +269,7 @@ tr:nth-child(even) {
     padding: 20px 40px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 999;
+    border-radius: 0 0 5px 5px;
 }
 
 .header span {
@@ -270,7 +287,7 @@ tr:nth-child(even) {
     font-size: 20px;
 }
 
-/* 메인 */
+/* 7. 메인 */
 .slide {
     width: 100%;
     height: 550px;
@@ -335,7 +352,7 @@ img {
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* 페이지 공통 */
+/* 8. 페이지 공통 */
 .content {
     width: 90%;
     max-width: 1100px;
@@ -343,16 +360,16 @@ img {
     padding: 40px;
 }
 
-/* 메뉴 관리 */
+/* 9. 메뉴 관리 */
 .cafe {}
 
-/* 상품 주문 */
+/* 10. 상품 주문 */
 .cart {}
 
-/* 주문 내역 */
+/* 11. 주문 내역 */
 .list {}
 
-/* 푸터 */
+/* 12. 푸터 */
 .footer {
     text-align: center;
     font-size: 13px;

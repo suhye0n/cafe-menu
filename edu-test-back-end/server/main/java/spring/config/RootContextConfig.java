@@ -59,7 +59,7 @@ public class RootContextConfig {
         MapperScannerConfigurer mapperScannerConfigurer = null;
         mapperScannerConfigurer = new MapperScannerConfigurer();
         mapperScannerConfigurer.setBasePackage("kr.co.edu");
-        mapperScannerConfigurer.setAnnotationClass(org.apache.ibatis.annotations.Mapper.class);//Annotation을 지정해 줘야 service interface 를 Mapper라고 인식하지 않음
+        mapperScannerConfigurer.setAnnotationClass(org.apache.ibatis.annotations.Mapper.class);
         mapperScannerConfigurer.setSqlSessionTemplateBeanName("mainSqlSessionTemplate");
         return mapperScannerConfigurer;
     }
@@ -82,9 +82,7 @@ public class RootContextConfig {
     @Bean(name = "objectMapper")
     public ObjectMapper getObjectMapper() {
         ObjectMapper mapper = new ObjectMapper();
-        //기본 날짜 포맷 비활성화
         mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-        //새로운 날짜 포맷 세팅
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         mapper.setDateFormat(dateFormat);
         mapper.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
