@@ -23,13 +23,13 @@
 
     <div class="main content">
         <div class="container">
-            <h2>인삿말 <i class="xi-emoticon-smiley-o" /></h2>
-            <p>안녕하세요, <b>카페 메뉴관리</b>입니다.</p>
+            <h2 style="color: #5C3916">인삿말 <i class="xi-emoticon-smiley-o" /></h2>
+            <p>안녕하세요, <b style="color: #B27C47">카페 메뉴관리</b>입니다.</p>
         </div>
         
         <div class="container">
-            <h2>설명서 <i class="xi-help-o" /></h2>
-            <h4>메뉴 관리</h4>
+            <h2 style="color: #5C3916">설명서 <i class="xi-help-o" /></h2>
+            <h4 style="color: #B27C47">메뉴 관리</h4>
             <ul>
                 <li class="ml">상품명/작성자/작성일로 메뉴를 검색할 수 있습니다.</li>
                 <li class="ml">상품을 등록할 수 있습니다.</li>
@@ -38,7 +38,7 @@
                 <li class="ml">등록된 상품을 수정/삭제할 수 있습니다.</li>
             </ul>
             
-            <h4>상품 주문</h4>
+            <h4 style="color: #B27C47">상품 주문</h4>
             <ul>
                 <li class="ml">주문 가능한 상품 리스트를 볼 수 있습니다.</li>
                 <li class="ml">상품을 장바구니에 추가할 수 있습니다.</li>
@@ -46,7 +46,7 @@
             </ul>
             
             
-            <h4>주문 내역</h4>
+            <h4 style="color: #B27C47">주문 내역</h4>
             <ul>
                 <li class="ml">상품 주문 리스트를 볼 수 있습니다.</li>
                 <li class="ml">주문을 처리/취소할 수 있습니다.</li>
