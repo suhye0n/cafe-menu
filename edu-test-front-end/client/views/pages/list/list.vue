@@ -1,66 +1,66 @@
 <template>
-    <div class="list">
-        <h3>주문 상세</h3>
+    <div class="list content">
+        <h1>주문 내역</h1>
 
         <div v-for="(groupedOrder, orderNumber) in groupedOrders">
-            <fieldset v-show="isOrderInProgress[orderNumber]">
-                <legend>주문 번호: {{ orderNumber }}번</legend>
+            <div class="container" v-show="isOrderInProgress[orderNumber]">
+                <h3>주문 번호: {{ orderNumber }}번</h3>
 
-                <table style="border: 1px solid #000; text-align: center;">
+                <table>
                     <thead>
                         <tr>
-                            <th style="border: 1px solid #000;">NO</th>
-                            <th style="border: 1px solid #000;">상품명</th>
-                            <th style="border: 1px solid #000;">카테고리</th>
-                            <th style="border: 1px solid #000;">온도</th>
-                            <th style="border: 1px solid #000;">수량</th>
-                            <th style="border: 1px solid #000;">주문금액</th>
+                            <th>NO</th>
+                            <th>상품명</th>
+                            <th>카테고리</th>
+                            <th>온도</th>
+                            <th>수량</th>
+                            <th>주문금액</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="(item, idx) in groupedOrder">
-                            <td style="border: 1px solid #000;">{{ idx }}</td>
-                            <td style="border: 1px solid #000;">{{ item.order_product_name }}</td>
-                            <td style="border: 1px solid #000;">{{ item.order_product_category }}</td>
-                            <td style="border: 1px solid #000;">{{ item.order_product_temperature }}</td>
-                            <td style="border: 1px solid #000;">{{ item.order_amount }}</td>
-                            <td style="border: 1px solid #000;">{{ item.order_price }}</td>
+                            <td>{{ idx }}</td>
+                            <td>{{ item.order_product_name }}</td>
+                            <td>{{ item.order_product_category }}</td>
+                            <td>{{ item.order_product_temperature }}</td>
+                            <td>{{ item.order_amount }}</td>
+                            <td>{{ item.order_price }}</td>
                         </tr>
                     </tbody>
                 </table>
 
-                합계: {{ calculateTotalPrice(groupedOrder) }}원
+                <h4>합계: {{ calculateTotalPrice(groupedOrder) }}원</h4>
 
                 <button @click="orderUpdate(orderNumber)">수령 완료</button>
                 <button @click="orderDelete(orderNumber)">주문 취소</button>
-            </fieldset>
+            </div>
         </div>
 
-        <table style="border: 1px solid #000; text-align: center;">
+        <table>
             <thead>
                 <tr>
-                    <th style="border: 1px solid #000;">NO</th>
-                    <th style="border: 1px solid #000;">주문번호</th>
-                    <th style="border: 1px solid #000;">상품명</th>
-                    <th style="border: 1px solid #000;">주문금액</th>
-                    <th style="border: 1px solid #000;">주문일</th>
-                    <th style="border: 1px solid #000;">주문상태</th>
+                    <th>NO</th>
+                    <th>주문번호</th>
+                    <th>상품명</th>
+                    <th>주문금액</th>
+                    <th>주문일</th>
+                    <th>주문상태</th>
                 </tr>
             </thead>
             <tbody>
                 <template v-for="(groupedOrder, orderNumber) in groupedOrders">
                     <tr>
-                        <td style="border: 1px solid #000;">{{ orderNumber }}</td>
-                        <td style="border: 1px solid #000;">
+                        <td>{{ orderNumber }}</td>
+                        <td>
                             {{ groupedOrder[0].order_product_name }}
                             <span v-if="groupedOrder.length > 1"> 외 {{ groupedOrder.length - 1 }}개</span>
                         </td>
-                        <td style="border: 1px solid #000;">{{ groupedOrder[0].order_product_category }}</td>
-                        <td style="border: 1px solid #000;">
+                        <td>{{ groupedOrder[0].order_product_category }}</td>
+                        <td>
                             {{ groupedOrder.reduce((sum, item) => sum + item.order_price, 0) }}
                         </td>
-                        <td style="border: 1px solid #000;">{{ groupedOrder[0].order_date }}</td>
-                        <td style="border: 1px solid #000;">{{ groupedOrder[0].order_state }}</td>
+                        <td>{{ groupedOrder[0].order_date }}</td>
+                        <td>{{ groupedOrder[0].order_state }}</td>
                     </tr>
                 </template>
             </tbody>

@@ -1,5 +1,7 @@
 <template>
-    <div class="cafe">
+    <div class="cafe content">
+        <h1>메뉴 관리</h1>
+
         <div class="search-section">
             <select v-model="selectedSearchOption">
                 <option value="product_name">상품명</option>
@@ -12,7 +14,7 @@
 
             <input v-else type="text" v-model="searchKeyword" placeholder="검색..." @keyup.enter="dataSearch" />
 
-            <button @click="dataSearch()">검색</button>
+            <button @click="dataSearch()" class="confirm">검색</button>
         </div>
 
         <hr />
@@ -48,7 +50,7 @@
                 <textarea class="full" placeholder="상세 설명" v-model="menu.product_explan" />
             </div>
             <div class="margin">
-                <button @click="handleButtonAction()">{{ buttonLabel }}</button>
+                <button @click="handleButtonAction()" class="confirm">{{ buttonLabel }}</button>
                 <button class="button" id="addBtn" @click="resetForm()">취소</button>
             </div>
         </div>
@@ -81,7 +83,7 @@
                         <td>{{ item.product_explan }}</td>
                         <td>{{ item.product_hot }}</td>
                         <td>{{ item.product_ice }}</td>
-                        <td><button @click="menuSelectOne(item)">수정</button></td>
+                        <td><button @click="menuSelectOne(item)" class="confirm">수정</button></td>
                         <td><button @click="menuDelete(item.product_index)">삭제</button></td>
                     </tr>
                 </tbody>

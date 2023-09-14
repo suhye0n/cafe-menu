@@ -1,14 +1,11 @@
-const {BASE_DIR} = require("../Global");
+const { BASE_DIR } = require("../Global");
 
 const express = require('express');
 const webServer = express();
 const expressProxy = require('express-http-proxy');
 
-//파일 시스템 관련 라이브러리
 const FS = require('fs');
-//stream: 특정 자원을 Streaming 하기 위한 라이브러리 => Transform: Streaming 중인 자원의 Data에 Data 수정 및 추가를 지원해주는 객체
 const Transform = require('stream').Transform;
-//Streaming 중인 자원에 새로운 데이터를 stream 공간에 추가하기 위한 라이브러리
 const newLineStream = require('new-line');
 
 webServer.listen(8000, function () {

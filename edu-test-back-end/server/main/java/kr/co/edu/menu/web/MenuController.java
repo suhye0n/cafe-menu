@@ -35,14 +35,6 @@ public class MenuController {
         return mav;
     }
 
-//    @RequestMapping(value = "/menuSelectList.request", method = RequestMethod.GET)
-//    public ModelAndView menuSelectList (@RequestBody HashMap<String, Object> param) {
-//        ModelAndView mav = new ModelAndView("jsonView");
-//        List<HashMap<String, Object>> menuList = menuService.menuSelectList(param);
-//        mav.addObject("result", menuList);
-//        return mav;
-//    }
-
     @RequestMapping(value = "/menuSelectList.request", method = RequestMethod.GET)
     public ModelAndView menuSelectList () {
         ModelAndView mav = new ModelAndView("jsonView");

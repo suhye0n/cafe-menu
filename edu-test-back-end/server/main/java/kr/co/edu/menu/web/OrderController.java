@@ -1,6 +1,5 @@
 package kr.co.edu.menu.web;
 
-import kr.co.edu.menu.service.OrderService;
 import kr.co.edu.menu.service.impl.OrderServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

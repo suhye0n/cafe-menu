@@ -1,5 +1,5 @@
 <template>
-    <div class="cart">
+    <div class="cart content">
         <h1>상품 주문</h1>
         <table>
             <thead>
@@ -25,9 +25,9 @@
 
         <div class="container">
             <h3>장바구니</h3>
-            <button @click="removeSelectedItems()">삭제</button>
 
             <div v-if="cartList && cartList.length > 0">
+            <button @click="removeSelectedItems()">삭제</button>
                 <table>
                     <thead>
                         <tr>
@@ -54,13 +54,12 @@
                         </tr>
                     </tbody>
                 </table>
+                <p>합계: {{ totalAmount }}원</p>
+                <button @click="cartOrder()">주문하기</button>
             </div>
             <div v-else>
                 <p>장바구니가 비어있습니다.</p>
             </div>
-            <p>합계: {{ totalAmount }}원</p>
-
-            <button @click="cartOrder()">주문하기</button>
         </div>
     </div>
 </template>

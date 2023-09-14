@@ -39,11 +39,6 @@ public class MenuServiceImpl implements MenuService {
         return result;
     }
 
-//    @Override
-//    public List<HashMap<String, Object>> menuSelectList(HashMap<String, Object> param) {
-//        return menuDAO.menuSelectList(param);
-//    }
-
     @Override
     public List<HashMap<String, Object>> menuSearch (HashMap<String, Object> param) {
         return menuDAO.menuSearch(param);

@@ -1,13 +1,13 @@
 /* 공통 */
 @font-face {
-    font-family: 'NanumSquareNeo-Variable';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+    font-family: 'S-CoreDream-3Light';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 
 * {
-    font-family: 'NanumSquareNeo-Variable';
+    font-family: 'S-CoreDream-3Light';
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -15,7 +15,8 @@
 }
 
 body {
-    margin-top: 60px;
+    margin-top: 55px;
+    background-color: #fbfbfc;
 }
 
 a {
@@ -32,12 +33,13 @@ table {
 th,
 td {
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #858ff1;
     text-align: center;
 }
 
 th {
-    background-color: #eee;
+    background-color: #8eb0f2;
+    color: #f2f2f2;
 }
 
 tr:nth-child(even) {
@@ -51,7 +53,7 @@ tr:hover {
 tr td button {
     padding: 5px 10px;
     cursor: pointer;
-    background-color: pink;
+    background-color: #9dc3ff;
     color: white;
     border: none;
     border-radius: 3px;
@@ -65,15 +67,19 @@ textarea,
 button {
     padding: 10px;
     margin: 5px 2px;
-    border: 1px solid #ccc;
+    border: 1px solid #858ff1;
     border-radius: 5px;
 }
 
 button {
     padding: 8px;
-    background-color: pink;
+    background-color: #9dc3ff;
     color: white;
     cursor: pointer;
+}
+
+.confirm {
+    background-color: #90a1f8;
 }
 
 button:disabled {
@@ -87,6 +93,51 @@ input[type="date"] {
 
 input[type="text"] {
     padding: 11px;
+}
+
+[type="radio"],
+span {
+    vertical-align: middle;
+}
+
+[type="radio"] {
+    appearance: none;
+    border: max(2px, 0.1em) solid #858ff1;
+    border-radius: 50%;
+    width: 1.25em;
+    height: 1.25em;
+    transition: border 0.2s ease-in-out;
+    margin-right: 2px;
+}
+
+[type="radio"]:checked {
+    border: 0.4em solid #9dc3ff;
+}
+
+[type="radio"]:focus-visible {
+    outline-offset: max(2px, 0.1em);
+    outline: max(2px, 0.1em) dotted #9dc3ff;
+}
+
+[type="radio"]:hover {
+    box-shadow: 0 0 0 max(4px, 0.2em) lightgray;
+    cursor: pointer;
+}
+
+[type="radio"]:hover+span {
+    cursor: pointer;
+}
+
+[type="radio"]:disabled {
+    background-color: lightgray;
+    box-shadow: none;
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+[type="radio"]:disabled+span {
+    opacity: 0.7;
+    cursor: not-allowed;
 }
 
 textarea {
@@ -109,15 +160,28 @@ textarea {
     background-color: #f9f9f9;
 }
 
+h2 {
+    margin: 20px 0;
+}
+
+h4 {
+    margin: 20px 0;
+}
+
+.ml {
+    margin-left: 20px;
+}
+
 /* 헤더 */
 .header {
-    background-color: pink;
+    background-color: #9dc3ff;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     padding: 20px 40px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 999;
 }
 
 .header span {
@@ -194,26 +258,21 @@ img {
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* 메뉴 관리 */
-.cafe {
+/* 페이지 공통 */
+.content {
     max-width: 800px;
     margin: 20px auto;
     padding: 20px;
 }
+
+/* 메뉴 관리 */
+.cafe {}
 
 /* 상품 주문 */
-.cart {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-}
+.cart {}
 
 /* 주문 내역 */
-.list {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-}
+.list {}
 
 /* 푸터 */
 .footer {

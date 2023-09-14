@@ -2,13 +2,13 @@
     <div class="slide">
         <ul class="slides">
             <li :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
-                <img src="/client/resources/img/1.jpg" />
+                <img src="/client/resources/img/1.png" />
             </li>
             <li :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
                 <img src="/client/resources/img/2.jpg" />
             </li>
             <li :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
-                <img src="/client/resources/img/3.jpg" />
+                <img src="/client/resources/img/3.png" />
             </li>
         </ul>
         <p class="controller">
@@ -19,6 +19,39 @@
             <span v-for="(slide, index) in slides" :key="index" :class="{ active: index === currentIndex }"
                 @click="goToSlide(index)"></span>
         </p>
+    </div>
+
+    <div class="main content">
+        <div class="container">
+            <h2>인삿말</h2>
+            <p>안녕하세요, <b>카페 메뉴관리</b>입니다.</p>
+        </div>
+        
+        <div class="container">
+            <h2>설명서</h2>
+            <h4>메뉴 관리</h4>
+            <ul>
+                <li class="ml">상품명/작성자/작성일로 메뉴를 검색할 수 있습니다.</li>
+                <li class="ml">상품을 등록할 수 있습니다.</li>
+                <li class="ml">상품 등록 컨테이너를 접을 수 있습니다.</li>
+                <li class="ml">등록된 상품 리스트를 볼 수 있습니다.</li>
+                <li class="ml">등록된 상품을 수정/삭제할 수 있습니다.</li>
+            </ul>
+            
+            <h4>상품 주문</h4>
+            <ul>
+                <li class="ml">주문 가능한 상품 리스트를 볼 수 있습니다.</li>
+                <li class="ml">상품을 장바구니에 추가할 수 있습니다.</li>
+                <li class="ml">장바구니에 추가한 상품을 주문할 수 있습니다.</li>
+            </ul>
+            
+            
+            <h4>주문 내역</h4>
+            <ul>
+                <li class="ml">상품 주문 리스트를 볼 수 있습니다.</li>
+                <li class="ml">주문을 처리/취소할 수 있습니다.</li>
+            </ul>
+        </div>
     </div>
 </template>
 
