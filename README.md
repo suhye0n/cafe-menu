@@ -26,16 +26,19 @@
 
 ## 화면
 **메인 화면**
-![image](https://github.com/suhye0n/cafe-menu/assets/63187994/3b31a629-0bce-4fca-8df6-79bf4b26577e)
+![스크린샷 2023-09-14 163711](https://github.com/suhye0n/cafe-menu/assets/63187994/32a48154-dfc2-4216-b4cd-d130b2f6b3c6)
 
 **메뉴 관리 화면**
-![image](https://github.com/suhye0n/cafe-menu/assets/63187994/8e81100d-0c2f-4517-a202-53f0f37ee657)
+![스크린샷 2023-09-14 163746](https://github.com/suhye0n/cafe-menu/assets/63187994/f6399dd2-24fe-4828-a7e9-368d4496229c)
+
 
 **상품 주문 화면**
-![image](https://github.com/suhye0n/cafe-menu/assets/63187994/b9136288-b666-418e-889a-49214964ff24)
+![스크린샷 2023-09-14 163807](https://github.com/suhye0n/cafe-menu/assets/63187994/cb49838c-5fb4-4bad-a538-f8f6ef09ee06)
+
 
 **주문 내역 화면**
-![image](https://github.com/suhye0n/cafe-menu/assets/63187994/d2587b4a-0c8f-4166-8957-dcaa9b7b2e8b)
+![스크린샷 2023-09-14 163822](https://github.com/suhye0n/cafe-menu/assets/63187994/434ce34a-152b-4d75-9e8e-31703f75af1a)
+
 
 
 
