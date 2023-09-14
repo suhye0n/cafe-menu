@@ -49,7 +49,7 @@
             </div>
             <div class="margin">
                 <button @click="handleButtonAction()" class="confirm"><i class="xi-library-add" />{{ buttonLabel }}</button>
-                <button v-if="isEditMode" class="button" id="addBtn" @click="resetForm()"><i class="xi-calendar-cancle" />취소</button>
+                <button v-if="isEditMode" class="button danger" id="addBtn" @click="resetForm()"><i class="xi-calendar-cancle" />취소</button>
             </div>
         </div>
 
@@ -82,7 +82,7 @@
                         <td>{{ item.product_hot }}</td>
                         <td>{{ item.product_ice }}</td>
                         <td><button @click="menuSelectOne(item); this.isContainerOpen = true;" class="confirm"><i class="xi-pen-o" /></button></td>
-                        <td><button @click="menuDelete(item.product_index)"><i class="xi-close" /></button></td>
+                        <td><button @click="menuDelete(item.product_index)" class="danger"><i class="xi-close" /></button></td>
                     </tr>
                 </tbody>
             </table>

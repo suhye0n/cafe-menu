@@ -18,7 +18,7 @@
                     <td>{{ item.product_name }}</td>
                     <td>{{ item.product_price }}</td>
                     <td>
-                        <button @click="cartInsert(item, '핫')" :disabled="!item.product_hot" class="confirm"><i class="xi-firefox" />핫</button>
+                        <button @click="cartInsert(item, '핫')" :disabled="!item.product_hot" class="danger"><i class="xi-firefox" />핫</button>
                         <button @click="cartInsert(item, '아이스')" :disabled="!item.product_ice"><i class="xi-snow-crystal" /> 아이스</button>
                     </td>
                 </tr>
@@ -29,7 +29,7 @@
             <h3>장바구니</h3>
 
             <div v-if="cartList && cartList.length > 0">
-            <button @click="removeSelectedItems()">삭제</button>
+            <button @click="removeSelectedItems()" class="danger">삭제</button>
                 <table>
                     <thead>
                         <tr>

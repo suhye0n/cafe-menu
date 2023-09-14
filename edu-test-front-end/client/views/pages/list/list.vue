@@ -1,12 +1,8 @@
 <template>
     <div class="list content">
-        <h1>
-            <i class="xi-spinner-3 xi-spin" /> 진행중인 주문
-        </h1>
-
         <div v-for="(groupedOrder, orderNumber) in groupedOrders">
             <div class="container" v-show="isOrderInProgress[orderNumber]">
-                <h3>주문 번호: {{ orderNumber }}번</h3>
+                <h3><i class="xi-spinner-3 xi-spin" /> 주문 번호: {{ orderNumber }}번</h3>
 
                 <table>
                     <thead>
@@ -34,7 +30,7 @@
                 <h4>합계: {{ calculateTotalPrice(groupedOrder) }}원</h4>
 
                 <button @click="orderUpdate(orderNumber)" class="confirm"><i class="xi-star-o" /> 수령 완료</button>
-                <button @click="orderDelete(orderNumber)"><i class="xi-close" /> 주문 취소</button>
+                <button @click="orderDelete(orderNumber)" class="danger"><i class="xi-close" /> 주문 취소</button>
             </div>
         </div>
 
@@ -56,8 +52,8 @@
                     <tr>
                         <td>{{ groupedOrder[0].order_product_number }}</td>
                         <td>
-                            {{ groupedOrder[0].order_product_name }}
-                            <span v-if="groupedOrder.length > 1"> 외 {{ groupedOrder.length - 1 }}개</span>
+                            <span>{{ groupedOrder[0].order_product_name }}</span>
+                            <span style="color: #ff9d9d;" v-if="groupedOrder.length > 1"> 외 {{ groupedOrder.length - 1 }}개</span>
                         </td>
                         <td>
                             {{ groupedOrder.reduce((sum, item) => sum + item.order_price, 0) }}
