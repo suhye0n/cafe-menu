@@ -1,6 +1,6 @@
 <template>
     <div class="list content">
-        <h1>주문 내역</h1>
+        <h1>진행중인 주문</h1>
 
         <div v-for="(groupedOrder, orderNumber) in groupedOrders">
             <div class="container" v-show="isOrderInProgress[orderNumber]">
@@ -36,6 +36,7 @@
             </div>
         </div>
 
+        <h1>주문 내역</h1>
         <table>
             <thead>
                 <tr>

@@ -1,4 +1,4 @@
-/* 공통 */
+/* 폰트 */
 @font-face {
     font-family: 'S-CoreDream-3Light';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
@@ -6,6 +6,37 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Humanbumsuk';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-2@1.0/Humanbumsuk.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* 스크롤바 */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 20px;
+}
+
+::-webkit-scrollbar-button:start {
+    background-color: white;
+}
+
+::-webkit-scrollbar-button:end {
+    background-color: white;
+}
+
+::-webkit-scrollbar-track-piece {
+    background-color: white;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: #90a1f8;
+}
+
+/* 공통 */
 * {
     font-family: 'S-CoreDream-3Light';
     margin: 0;
@@ -16,38 +47,13 @@
 
 body {
     margin-top: 55px;
-    background-color: #fbfbfc;
+    background-color: rgba(162, 194, 249, .06);
 }
 
 a {
+    transition: .4s ease-in-out;
     color: #333;
     text-decoration: none;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-th,
-td {
-    padding: 10px;
-    border: 1px solid #858ff1;
-    text-align: center;
-}
-
-th {
-    background-color: #8eb0f2;
-    color: #f2f2f2;
-}
-
-tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-tr:hover {
-    background-color: #f5f5f5;
 }
 
 tr td button {
@@ -69,6 +75,7 @@ button {
     margin: 5px 2px;
     border: 1px solid #858ff1;
     border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 button {
@@ -76,10 +83,12 @@ button {
     background-color: #9dc3ff;
     color: white;
     cursor: pointer;
+    transition: .4s ease-in-out;
 }
 
-.confirm {
-    background-color: #90a1f8;
+button:hover,
+a:hover {
+    opacity: .8;
 }
 
 button:disabled {
@@ -144,20 +153,12 @@ textarea {
     resize: none;
 }
 
-.margin {
-    margin: 20px 0;
-}
-
-.full {
-    width: 100%;
-}
-
 .container {
     padding: 20px;
     margin: 40px 0;
     border-radius: 10px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    background-color: #f9f9f9;
+    background-color: rgba(162, 194, 249, .08);
 }
 
 h2 {
@@ -168,8 +169,69 @@ h4 {
     margin: 20px 0;
 }
 
+/* 빠른 스타일 적용 */
+.confirm {
+    background-color: #90a1f8;
+}
+
+.margin {
+    margin: 20px 0;
+}
+
+.full {
+    width: 100%;
+}
+
 .ml {
     margin-left: 20px;
+}
+
+
+/* 테이블*/
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+th,
+td {
+    padding: 10px;
+    border: 1px solid #858ff1;
+    text-align: center;
+}
+
+.container th,
+.container td {
+    border: 0;
+}
+
+th {
+    background-color: #8eb0f2;
+    color: #f2f2f2;
+}
+
+.container th,
+.container td {
+    font-family: 'Humanbumsuk';
+    background-color: transparent;
+    color: #333;
+}
+
+.container th {
+    background-color: rgba(162, 194, 249, .1);
+    border-bottom: .5px dashed rgba(162, 194, 249, .3);
+    color: #858585;
+    font-size: 14px;
+}
+
+tr:nth-child(even) {
+    border: .5px dashed rgba(162, 194, 249, .3);
+}
+
+.container tr:nth-child(even) {
+    background-color: rgba(162, 194, 249, .05);
 }
 
 /* 헤더 */
