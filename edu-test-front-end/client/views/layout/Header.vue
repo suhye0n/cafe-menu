@@ -1,16 +1,28 @@
 <template>
     <div class="header">
         <span class="title">
-            <router-link to="/">카페 메뉴관리</router-link>
+            <router-link to="/">
+                <i class="xi-cafe" style="font-size: 16px;" />
+                카페 메뉴관리
+            </router-link>
         </span>
         <span>
-            <router-link to="/cafe.page">메뉴관리</router-link>
+            <router-link to="/cafe.page">
+                <i class="xi-bars" />
+                메뉴관리
+            </router-link>
         </span>
         <span>
-            <router-link to="/cart.page">상품 주문</router-link>
+            <router-link to="/cart.page">
+                <i class="xi-cart-o" />
+                상품 주문
+            </router-link>
         </span>
         <span>
-            <router-link to="/list.page">주문 내역</router-link>
+            <router-link to="/list.page">
+                <i class="xi-calendar-list" />
+                주문 내역
+            </router-link>
         </span>
     </div>
 </template>

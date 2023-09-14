@@ -14,7 +14,7 @@
 
             <input v-else type="text" v-model="searchKeyword" placeholder="검색..." @keyup.enter="dataSearch" />
 
-            <button @click="dataSearch()" class="confirm">검색</button>
+            <button @click="dataSearch()" class="confirm"><i class="xi-search" /></button>
         </div>
 
         <hr />
@@ -48,8 +48,8 @@
                 <textarea class="full" placeholder="상세 설명" v-model="menu.product_explan" />
             </div>
             <div class="margin">
-                <button @click="handleButtonAction()" class="confirm">{{ buttonLabel }}</button>
-                <button v-if="isEditMode" class="button" id="addBtn" @click="resetForm()">취소</button>
+                <button @click="handleButtonAction()" class="confirm"><i class="xi-library-add" />{{ buttonLabel }}</button>
+                <button v-if="isEditMode" class="button" id="addBtn" @click="resetForm()"><i class="xi-calendar-cancle" />취소</button>
             </div>
         </div>
 
@@ -81,8 +81,8 @@
                         <td>{{ item.product_explan }}</td>
                         <td>{{ item.product_hot }}</td>
                         <td>{{ item.product_ice }}</td>
-                        <td><button @click="menuSelectOne(item); this.isContainerOpen = true;" class="confirm">수정</button></td>
-                        <td><button @click="menuDelete(item.product_index)">삭제</button></td>
+                        <td><button @click="menuSelectOne(item); this.isContainerOpen = true;" class="confirm"><i class="xi-pen-o" /></button></td>
+                        <td><button @click="menuDelete(item.product_index)"><i class="xi-close" /></button></td>
                     </tr>
                 </tbody>
             </table>

@@ -23,12 +23,12 @@
 
     <div class="main content">
         <div class="container">
-            <h2>인삿말</h2>
+            <h2>인삿말 <i class="xi-emoticon-smiley-o" /></h2>
             <p>안녕하세요, <b>카페 메뉴관리</b>입니다.</p>
         </div>
         
         <div class="container">
-            <h2>설명서</h2>
+            <h2>설명서 <i class="xi-help-o" /></h2>
             <h4>메뉴 관리</h4>
             <ul>
                 <li class="ml">상품명/작성자/작성일로 메뉴를 검색할 수 있습니다.</li>

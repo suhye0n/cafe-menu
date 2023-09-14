@@ -16,8 +16,8 @@
                     <td>{{ item.product_name }}</td>
                     <td>{{ item.product_price }}</td>
                     <td>
-                        <button @click="cartInsert(item, '핫')" :disabled="!item.product_hot">핫</button>
-                        <button @click="cartInsert(item, '아이스')" :disabled="!item.product_ice">아이스</button>
+                        <button @click="cartInsert(item, '핫')" :disabled="!item.product_hot" class="confirm"><i class="xi-firefox" />핫</button>
+                        <button @click="cartInsert(item, '아이스')" :disabled="!item.product_ice"><i class="xi-snow-crystal" /> 아이스</button>
                     </td>
                 </tr>
             </tbody>
