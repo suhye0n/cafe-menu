@@ -4,7 +4,7 @@ const {BASE_DIR, PROJECT_NAME, SERVICE_STATUS} = require("./Global");
 
 module.exports = {
     name: PROJECT_NAME,
-    mode: "development",//production
+    mode: "development",
     devtool: 'eval',
     
     resolve: {fallback: { "constants": false }},
@@ -38,7 +38,7 @@ module.exports = {
     plugins: [new VueLoaderPlugin()],
 
     output: {
-        path: `${BASE_DIR}/client/build`,	// __dirname: webpack.config.js 파일이 위치한 경로
+        path: `${BASE_DIR}/client/build`,
         filename: 'bundle.js'
     },
 }
