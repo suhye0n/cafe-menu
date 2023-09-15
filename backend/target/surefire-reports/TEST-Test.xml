@@ -5,7 +5,7 @@
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="17.0.8+9-LTS-211"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-17\bin"/>
-    <property name="maven.multiModuleProjectDirectory" value="C:\Users\claph\Documents\GitHub\cafe-menu\edu-test-back-end"/>
+    <property name="maven.multiModuleProjectDirectory" value="C:\Users\claph\Documents\GitHub\cafe-menu\backend"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="java.vendor.url" value="https://java.oracle.com/"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
@@ -16,7 +16,7 @@
     <property name="user.country" value="KR"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="C:\Users\claph\Documents\GitHub\cafe-menu\edu-test-back-end"/>
+    <property name="user.dir" value="C:\Users\claph\Documents\GitHub\cafe-menu\backend"/>
     <property name="java.vm.compressedOopsMode" value="32-bit"/>
     <property name="java.runtime.version" value="17.0.8+9-LTS-211"/>
     <property name="os.arch" value="amd64"/>
