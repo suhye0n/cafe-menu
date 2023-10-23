@@ -3,7 +3,7 @@
         <span class="title">
             <router-link to="/">
                 <i class="xi-cafe" />
-                카페 메뉴관리
+                어서와
             </router-link>
         </span>
         <span style="float: right">
@@ -23,6 +23,24 @@
                 <router-link to="/list.page">
                     <i class="xi-calendar-list" />
                     주문 내역
+                </router-link>
+            </span>
+            <span>
+                <router-link to="/game/pet.page">
+                    <i class="xi-calendar-list" />
+                    미니게임
+                </router-link>
+            </span>
+            <span>
+                <router-link to="/album.page">
+                    <i class="xi-calendar-list" />
+                    사진첩
+                </router-link>
+            </span>
+            <span>
+                <router-link to="/guestbook.page">
+                    <i class="xi-calendar-list" />
+                    방명록
                 </router-link>
             </span>
         </span>
